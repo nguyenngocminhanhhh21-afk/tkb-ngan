@@ -1,0 +1,2764 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Hỗ trợ tràn viền tai thỏ / Dynamic Island trên iOS & Android -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Thời Khóa Biểu HK02</title>
+
+  <!-- Thiết lập chế độ Web App toàn màn hình (Standalone PWA) -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="TKB HK02" />
+  <meta name="application-name" content="TKB HK02" />
+  <meta name="theme-color" id="meta-theme-color" content="#FFF5F9" />
+
+  <!-- Icon 180x180px & Manifest sẽ được vẽ động bằng HTML5 Canvas -->
+  <link id="apple-touch-icon" rel="apple-touch-icon" sizes="180x180" href="" />
+  <link id="favicon-link" rel="icon" type="image/png" sizes="180x180" href="" />
+  <link id="manifest-link" rel="manifest" href="" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Be Vietnam Pro & Quicksand -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       1. HỆ THỐNG 4 THEME PASTEL SỮA DỊU MẮT (MILKY MUTED PASTEL)
+       ========================================================================== */
+    :root,
+    [data-theme="pink"] {
+      --font-main: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Quicksand', 'Be Vietnam Pro', sans-serif;
+
+      /* Theme 1 (Mặc định): Bubblegum Pink dịu mắt */
+      --bg-gradient: linear-gradient(135deg, #FFF5F9 0%, #FCE7F1 100%);
+      --blob-1: rgba(240, 154, 192, 0.28);
+      --blob-2: rgba(245, 194, 215, 0.36);
+      --blob-3: rgba(238, 153, 189, 0.2);
+
+      --glass-bg: rgba(255, 250, 252, 0.84);
+      --glass-strong: rgba(255, 251, 253, 0.94);
+      --glass-subtle: rgba(255, 248, 251, 0.72);
+      --sticky-col-bg: rgba(255, 245, 249, 0.96);
+      --glass-border: #F5C2D7;
+      --glass-shadow: 0 10px 28px rgba(238, 153, 189, 0.14);
+
+      --text-primary: #4A283A;
+      --text-secondary: #754D62;
+      --text-muted: #A37B90;
+
+      --accent: #EE99BD;
+      --accent-2: #F09AC0;
+      --accent-gradient: linear-gradient(135deg, #F4AFCE 0%, #EE99BD 100%);
+      --accent-soft: rgba(240, 154, 192, 0.18);
+
+      --today-ring: rgba(238, 153, 189, 0.55);
+      --today-bg: rgba(252, 231, 241, 0.75);
+
+      --input-bg: rgba(255, 252, 253, 0.96);
+      --modal-bg: rgba(255, 251, 253, 0.98);
+      --scrollbar-thumb: rgba(238, 153, 189, 0.45);
+    }
+
+    [data-theme="mint"] {
+      /* Theme 2: Bạc Hà Sữa */
+      --bg-gradient: linear-gradient(135deg, #F5FAF8 0%, #EBF4F0 100%);
+      --blob-1: rgba(196, 224, 214, 0.32);
+      --blob-2: rgba(214, 234, 227, 0.36);
+      --blob-3: rgba(182, 214, 203, 0.22);
+
+      --glass-bg: rgba(252, 255, 254, 0.84);
+      --glass-strong: rgba(252, 255, 254, 0.94);
+      --glass-subtle: rgba(250, 254, 252, 0.68);
+      --sticky-col-bg: rgba(245, 250, 248, 0.96);
+      --glass-border: #DFECE7;
+      --glass-shadow: 0 10px 28px rgba(72, 107, 96, 0.06);
+
+      --text-primary: #374742;
+      --text-secondary: #5E706A;
+      --text-muted: #879993;
+
+      --accent: #7CA89B;
+      --accent-2: #96BDB1;
+      --accent-gradient: linear-gradient(135deg, #96BDB1 0%, #7CA89B 100%);
+      --accent-soft: rgba(124, 168, 155, 0.13);
+
+      --today-ring: rgba(124, 168, 155, 0.45);
+      --today-bg: rgba(238, 247, 244, 0.82);
+
+      --input-bg: rgba(252, 255, 254, 0.95);
+      --modal-bg: rgba(252, 255, 254, 0.98);
+      --scrollbar-thumb: rgba(124, 168, 155, 0.35);
+    }
+
+    [data-theme="lavender"] {
+      /* Theme 3: Oải Hương Sữa */
+      --bg-gradient: linear-gradient(135deg, #F8F6FB 0%, #F0ECF7 100%);
+      --blob-1: rgba(216, 206, 235, 0.32);
+      --blob-2: rgba(228, 221, 242, 0.36);
+      --blob-3: rgba(204, 192, 224, 0.22);
+
+      --glass-bg: rgba(253, 252, 255, 0.84);
+      --glass-strong: rgba(253, 252, 255, 0.94);
+      --glass-subtle: rgba(252, 251, 254, 0.68);
+      --sticky-col-bg: rgba(248, 246, 251, 0.96);
+      --glass-border: #E7E1F0;
+      --glass-shadow: 0 10px 28px rgba(96, 84, 122, 0.06);
+
+      --text-primary: #413B4D;
+      --text-secondary: #6A6378;
+      --text-muted: #938CA1;
+
+      --accent: #9B8BB8;
+      --accent-2: #B2A4CC;
+      --accent-gradient: linear-gradient(135deg, #B2A4CC 0%, #9B8BB8 100%);
+      --accent-soft: rgba(155, 139, 184, 0.13);
+
+      --today-ring: rgba(155, 139, 184, 0.45);
+      --today-bg: rgba(242, 238, 249, 0.82);
+
+      --input-bg: rgba(253, 252, 255, 0.95);
+      --modal-bg: rgba(253, 252, 255, 0.98);
+      --scrollbar-thumb: rgba(155, 139, 184, 0.35);
+    }
+
+    [data-theme="peach"] {
+      /* Theme 4: Đào Sữa */
+      --bg-gradient: linear-gradient(135deg, #FCF8F5 0%, #F7EFE9 100%);
+      --blob-1: rgba(237, 213, 198, 0.32);
+      --blob-2: rgba(244, 227, 216, 0.36);
+      --blob-3: rgba(227, 199, 182, 0.22);
+
+      --glass-bg: rgba(255, 253, 251, 0.84);
+      --glass-strong: rgba(255, 253, 251, 0.94);
+      --glass-subtle: rgba(254, 251, 248, 0.68);
+      --sticky-col-bg: rgba(252, 248, 245, 0.96);
+      --glass-border: #EFE4DC;
+      --glass-shadow: 0 10px 28px rgba(130, 102, 86, 0.06);
+
+      --text-primary: #4A403B;
+      --text-secondary: #756862;
+      --text-muted: #9E918A;
+
+      --accent: #C99782;
+      --accent-2: #D9B09E;
+      --accent-gradient: linear-gradient(135deg, #D9B09E 0%, #C99782 100%);
+      --accent-soft: rgba(201, 151, 130, 0.13);
+
+      --today-ring: rgba(201, 151, 130, 0.45);
+      --today-bg: rgba(249, 241, 235, 0.82);
+
+      --input-bg: rgba(255, 253, 251, 0.95);
+      --modal-bg: rgba(255, 253, 251, 0.98);
+      --scrollbar-thumb: rgba(201, 151, 130, 0.35);
+    }
+
+    /* ==========================================================================
+       2. SAFE AREA & GLASSMORPHISM
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      min-height: 100%;
+      background: var(--bg-gradient);
+    }
+
+    body {
+      font-family: var(--font-main);
+      color: var(--text-primary);
+      background: var(--bg-gradient);
+      background-attachment: fixed;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      padding-left: env(safe-area-inset-left, 0px);
+      padding-right: env(safe-area-inset-right, 0px);
+      transition: background 0.55s ease, color 0.35s ease;
+    }
+
+    .font-display {
+      font-family: var(--font-display);
+    }
+
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .glass-strong {
+      background: var(--glass-strong);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+    }
+
+    .glass-subtle {
+      background: var(--glass-subtle);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+    }
+
+    .sticky-slot-col {
+      position: sticky;
+      left: 0;
+      z-index: 12;
+      background: var(--sticky-col-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 4px 0 14px rgba(15, 23, 42, 0.05);
+    }
+
+    .text-main { color: var(--text-primary); }
+    .text-sub { color: var(--text-secondary); }
+    .text-dim { color: var(--text-muted); }
+
+    /* ==========================================================================
+       3. HIỆU ỨNG NỀN CHUYỂN ĐỘNG (BLOBS & CANVAS)
+       ========================================================================== */
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .ambient-blobs {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(66px);
+      opacity: 0.92;
+      will-change: transform;
+      animation: blobFloat 18s ease-in-out infinite alternate;
+      transition: background 0.7s ease;
+    }
+
+    .blob-1 {
+      width: 46vw;
+      height: 46vw;
+      max-width: 520px;
+      max-height: 520px;
+      top: -12%;
+      left: -8%;
+      background: var(--blob-1);
+    }
+
+    .blob-2 {
+      width: 42vw;
+      height: 42vw;
+      max-width: 480px;
+      max-height: 480px;
+      bottom: -14%;
+      right: -8%;
+      background: var(--blob-2);
+      animation-duration: 22s;
+      animation-delay: -5s;
+    }
+
+    .blob-3 {
+      width: 34vw;
+      height: 34vw;
+      max-width: 380px;
+      max-height: 380px;
+      top: 38%;
+      left: 48%;
+      background: var(--blob-3);
+      animation-duration: 26s;
+      animation-delay: -10s;
+    }
+
+    @keyframes blobFloat {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(28px, -20px) scale(1.06); }
+      100% { transform: translate(-20px, 24px) scale(0.96); }
+    }
+
+    body.motion-off .blob {
+      animation: none !important;
+    }
+    body.motion-off #bg-canvas {
+      opacity: 0;
+    }
+
+    /* ==========================================================================
+       4. THẺ MÔN HỌC KẸO NGỌT & HIỆU ỨNG
+       ========================================================================== */
+    .course-card {
+      position: relative;
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.25s ease,
+                  opacity 0.3s ease,
+                  filter 0.3s ease;
+      cursor: pointer;
+    }
+
+    .course-card:hover {
+      transform: translateY(-3px) scale(1.012);
+      box-shadow: 0 12px 24px rgba(131, 24, 67, 0.12);
+      z-index: 5;
+    }
+
+    .course-card:active {
+      transform: translateY(-1px) scale(0.99);
+    }
+
+    .course-inactive {
+      opacity: 0.48 !important;
+      filter: saturate(0.45);
+    }
+    .course-inactive:hover {
+      opacity: 0.84 !important;
+      filter: saturate(0.82);
+    }
+
+    @keyframes cardEnter {
+      from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .stagger-item {
+      animation: cardEnter 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: calc(var(--stagger-idx, 0) * 40ms);
+    }
+    body.motion-off .stagger-item {
+      animation: none !important;
+    }
+
+    .today-column-header {
+      background: var(--accent-gradient);
+      color: #ffffff !important;
+      box-shadow: 0 6px 18px var(--today-ring);
+    }
+
+    .today-cell {
+      background: var(--today-bg);
+      box-shadow: inset 0 0 0 1.5px var(--today-ring);
+    }
+
+    /* 6 tông màu pastel pha sữa dịu mắt (low saturation) cho các thẻ môn học */
+    .tone-strawberry {
+      background: linear-gradient(135deg, #FBF2F5 0%, #F5E6EB 100%);
+      border: 1px solid #EBD4DC;
+      color: #5C3D47;
+    }
+    .tone-sky {
+      background: linear-gradient(135deg, #F1F6FA 0%, #E6EFF6 100%);
+      border: 1px solid #D4E3EE;
+      color: #364B5C;
+    }
+    .tone-lavender {
+      background: linear-gradient(135deg, #F5F2FA 0%, #ECE7F5 100%);
+      border: 1px solid #DED6EC;
+      color: #463B59;
+    }
+    .tone-mint {
+      background: linear-gradient(135deg, #F0F7F4 0%, #E4F0EB 100%);
+      border: 1px solid #D1E4DC;
+      color: #324D43;
+    }
+    .tone-peach {
+      background: linear-gradient(135deg, #FBF4EE 0%, #F5EAE1 100%);
+      border: 1px solid #EAD8CA;
+      color: #5C4335;
+    }
+    .tone-lemon {
+      background: linear-gradient(135deg, #FAF8EE 0%, #F4F0DF 100%);
+      border: 1px solid #E8E1C8;
+      color: #574E33;
+    }
+
+    /* Form inputs & selects */
+    .form-field {
+      width: 100%;
+      border-radius: 0.9rem;
+      padding: 0.65rem 0.85rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: var(--input-bg);
+      border: 1px solid var(--glass-border);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .form-field:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    /* Thanh trượt chọn tuần */
+    input[type="range"].week-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 8px;
+      border-radius: 9999px;
+      background: var(--accent-soft);
+      outline: none;
+    }
+    input[type="range"].week-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 9999px;
+      background: var(--accent-gradient);
+      border: 3px solid #ffffff;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    input[type="range"].week-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.14);
+    }
+    input[type="range"].week-slider::-moz-range-thumb {
+      width: 22px;
+      height: 22px;
+      border-radius: 9999px;
+      background: var(--accent-gradient);
+      border: 3px solid #ffffff;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
+      cursor: pointer;
+    }
+
+    .custom-scroll::-webkit-scrollbar {
+      height: 7px;
+      width: 7px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb);
+      border-radius: 9999px;
+    }
+
+    /* Modal transitions */
+    .modal-backdrop {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.24s ease;
+    }
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-panel {
+      transform: translateY(18px) scale(0.96);
+      opacity: 0;
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.24s ease;
+      background: var(--modal-bg);
+      border: 1px solid var(--glass-border);
+    }
+    .modal-backdrop.open .modal-panel {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    /* Toast thông báo nổi */
+    .toast-box {
+      transform: translate(-50%, 24px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease;
+      bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    }
+    .toast-box.show {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-pink-300/40">
+
+  <!-- Hiệu ứng nền chuyển động kẹo ngọt -->
+  <div class="ambient-blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- Khung nội dung chính -->
+  <div class="relative z-10 max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-4 sm:py-7 space-y-5">
+
+    <!-- ======================================================================
+         HEADER: TIÊU ĐỀ & 4 THEME PASTEL KẸO NGỌT
+         ====================================================================== -->
+    <header class="glass-card rounded-3xl p-4 sm:p-6 space-y-4">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        <div class="space-y-1.5">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold"
+                  style="background: var(--accent-soft); color: var(--accent);">
+              <span>🍬</span> Lịch học kỳ 2
+            </span>
+            <span id="standalone-badge" class="hidden inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold glass-subtle text-sub">
+              <span>📱</span> Chế độ App
+            </span>
+            <span id="edited-summary-badge" class="hidden inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-500/15 text-amber-700">
+              <span>✏️</span> Đã tùy chỉnh lịch
+            </span>
+          </div>
+
+          <h1 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-main leading-tight">
+            Thời Khóa Biểu <span style="background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">HK02</span>
+          </h1>
+
+          <p class="text-xs sm:text-sm font-semibold text-sub">
+            Năm học 2026–2027 • Lớp A26303 • 6 học phần (17 tín chỉ)
+          </p>
+        </div>
+
+        <!-- Bộ chọn 4 theme: Bubblegum Pink & 3 theme pastel sữa dịu mắt -->
+        <div class="flex flex-wrap items-center gap-2">
+          <div class="glass-subtle rounded-2xl p-1.5 flex flex-wrap items-center gap-1" role="group" aria-label="Chọn chủ đề màu pastel">
+            <button data-theme-btn="pink" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5" title="Bubblegum Pink">
+              <span>🫧</span><span class="hidden sm:inline">Bubblegum</span>
+            </button>
+            <button data-theme-btn="mint" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5" title="Bạc Hà Sữa">
+              <span>🍃</span><span class="hidden sm:inline">Bạc Hà</span>
+            </button>
+            <button data-theme-btn="lavender" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5" title="Oải Hương Sữa">
+              <span>🪻</span><span class="hidden sm:inline">Oải Hương</span>
+            </button>
+            <button data-theme-btn="peach" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5" title="Đào Sữa">
+              <span>🍑</span><span class="hidden sm:inline">Đào Sữa</span>
+            </button>
+          </div>
+
+          <button id="toggle-motion-btn"
+                  class="glass-subtle hover:scale-105 active:scale-95 transition-transform px-3 py-2 rounded-2xl text-xs font-semibold text-main flex items-center gap-1.5"
+                  title="Bật hoặc tắt hiệu ứng chuyển động nền">
+            <span id="motion-icon">💫</span>
+            <span id="motion-label">Nền động</span>
+          </button>
+
+          <button id="fullscreen-btn"
+                  class="glass-subtle hover:scale-105 active:scale-95 transition-transform px-3 py-2 rounded-2xl text-xs font-semibold text-main flex items-center gap-1.5"
+                  title="Mở hoặc thoát chế độ toàn màn hình">
+            <span id="fullscreen-icon">⛶</span>
+            <span id="fullscreen-label">Toàn màn hình</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Thanh thao tác nhanh -->
+      <div class="pt-3 border-t border-pink-300/25 flex flex-wrap items-center justify-between gap-2.5">
+        <p class="text-xs text-sub flex items-center gap-1.5">
+          <span>💡</span>
+          <span>Chạm vào từng môn để <strong>xem chi tiết</strong>, <strong>ghi chú</strong> hoặc <strong>đổi ngày / tiết / phòng</strong> trực tiếp.</span>
+        </p>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <button id="add-session-btn"
+                  class="px-3.5 py-2 rounded-2xl text-xs font-bold text-white shadow-sm hover:opacity-95 hover:scale-[1.02] active:scale-95 transition flex items-center gap-1.5"
+                  style="background: var(--accent-gradient);">
+            <span>＋</span> Thêm buổi
+          </button>
+          <button id="reset-all-btn"
+                  class="glass-subtle hover:scale-[1.02] active:scale-95 transition px-3.5 py-2 rounded-2xl text-xs font-bold text-sub hover:text-main flex items-center gap-1.5"
+                  title="Khôi phục toàn bộ thời khóa biểu về lịch gốc HK02">
+            <span>↺</span> Khôi phục gốc
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ======================================================================
+         BANNER "HÔM NAY HỌC GÌ?"
+         ====================================================================== -->
+    <section id="today-banner" class="glass-strong rounded-3xl p-4 sm:p-5 relative overflow-hidden">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="space-y-1.5">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-white shadow-sm"
+                  style="background: var(--accent-gradient);">
+              <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+              Hôm nay học gì?
+            </span>
+            <span id="today-date-text" class="text-xs sm:text-sm font-semibold text-sub"></span>
+          </div>
+          <h2 id="today-headline" class="font-display text-lg sm:text-xl font-bold text-main"></h2>
+          <p id="today-subtext" class="text-xs sm:text-sm text-sub"></p>
+        </div>
+
+        <div id="today-courses-list" class="flex flex-wrap gap-2.5 md:justify-end"></div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         THANH CHỌN TUẦN (17 – 30) & CHẾ ĐỘ HIỂN THỊ
+         ====================================================================== -->
+    <section class="glass-card rounded-3xl p-4 sm:p-5 space-y-4">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div class="glass-subtle p-1.5 rounded-2xl inline-flex w-full sm:w-auto gap-1.5">
+          <button id="tab-grid-btn"
+                  class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-1.5">
+            <span>🗓️</span> Thời khóa biểu
+          </button>
+          <button id="tab-list-btn"
+                  class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-1.5">
+            <span>📚</span> Tất cả buổi học
+          </button>
+        </div>
+
+        <!-- Thanh kéo Tuần 17 -> 30 -->
+        <div class="flex-1 lg:max-w-xl glass-subtle rounded-2xl px-4 py-3 flex flex-col sm:flex-row sm:items-center gap-3">
+          <div class="flex items-center justify-between sm:justify-start gap-2.5 shrink-0">
+            <span class="text-xs font-bold uppercase tracking-wider text-dim">Tuần học</span>
+            <div class="flex items-center gap-1.5">
+              <button id="week-prev-btn" aria-label="Giảm tuần"
+                      class="w-8 h-8 rounded-xl glass-strong flex items-center justify-center font-bold text-main hover:scale-105 active:scale-95 transition">
+                −
+              </button>
+              <span id="week-badge"
+                    class="min-w-[82px] text-center px-3 py-1 rounded-xl text-sm font-extrabold text-white shadow-sm"
+                    style="background: var(--accent-gradient);">
+                Tuần 17
+              </span>
+              <button id="week-next-btn" aria-label="Tăng tuần"
+                      class="w-8 h-8 rounded-xl glass-strong flex items-center justify-center font-bold text-main hover:scale-105 active:scale-95 transition">
+                +
+              </button>
+            </div>
+          </div>
+
+          <div class="flex-1 flex flex-col gap-1">
+            <input id="week-slider" type="range" min="17" max="30" value="17" class="week-slider w-full" aria-label="Chọn tuần học từ 17 đến 30" />
+            <div class="flex justify-between text-[11px] font-semibold text-dim px-0.5">
+              <span>Tuần 17</span>
+              <span id="week-status-note" class="text-center font-bold" style="color: var(--accent);"></span>
+              <span>Tuần 30</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chuyển chế độ xem trên điện thoại: Dạng thẻ theo ngày / Dạng bảng -->
+      <div id="mobile-view-controls" class="md:hidden pt-1 space-y-3">
+        <div class="flex items-center justify-between gap-2">
+          <span class="text-xs font-semibold text-sub">Kiểu hiển thị:</span>
+          <div class="glass-subtle p-1 rounded-xl inline-flex gap-1">
+            <button id="mobile-mode-day" class="px-3 py-1.5 rounded-lg text-xs font-bold transition">Dạng thẻ theo ngày</button>
+            <button id="mobile-mode-grid" class="px-3 py-1.5 rounded-lg text-xs font-bold transition">Dạng bảng</button>
+          </div>
+        </div>
+        <div id="mobile-day-pills" class="flex items-center gap-1.5 overflow-x-auto custom-scroll pb-1"></div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TAB 1: THỜI KHÓA BIỂU (THEO NGÀY + DẠNG BẢNG CÓ CỘT STICKY)
+         ====================================================================== -->
+    <main id="view-grid" class="space-y-4">
+      <div id="mobile-day-view" class="md:hidden space-y-3"></div>
+
+      <div id="desktop-grid-wrapper" class="hidden md:block glass-card rounded-3xl p-3 sm:p-5 overflow-x-auto custom-scroll">
+        <div class="min-w-[880px]">
+          <div id="grid-header" class="grid grid-cols-[104px_repeat(7,minmax(0,1fr))] gap-2.5 mb-3"></div>
+          <div id="grid-body" class="space-y-2.5"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ======================================================================
+         TAB 2: DANH SÁCH TẤT CẢ CÁC BUỔI HỌC
+         ====================================================================== -->
+    <section id="view-list" class="hidden space-y-4">
+      <div id="course-list-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </section>
+
+    <!-- ======================================================================
+         KHU VỰC: HỌC PHẦN CHỜ XẾP LỊCH (MẶC ĐỊNH: GIÁO DỤC QUỐC PHÒNG)
+         ====================================================================== -->
+    <section id="unscheduled-section" class="space-y-3">
+      <div class="flex items-center justify-between px-1">
+        <h2 class="font-display text-base sm:text-lg font-extrabold text-main flex items-center gap-2">
+          <span>⏳</span>
+          <span>Học phần chờ xếp lịch</span>
+          <span id="unscheduled-count" class="px-2 py-0.5 rounded-full text-xs font-bold glass-subtle text-sub">1</span>
+        </h2>
+      </div>
+      <div id="unscheduled-list" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+    </section>
+
+    <footer class="text-center text-xs text-dim pb-4 pt-1">
+      Thời Khóa Biểu HK02 • Năm học 2026–2027 • Lớp A26303
+    </footer>
+  </div>
+
+  <!-- ========================================================================
+       MODAL THÔNG TIN & GHI CHÚ / CHỈNH SỬA LỊCH / THÊM BUỔI
+       ======================================================================== -->
+  <div id="session-modal"
+       class="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-3.5 sm:p-4 bg-rose-950/35 backdrop-blur-sm"
+       role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-panel w-full max-w-lg rounded-3xl p-5 sm:p-6 shadow-2xl max-h-[90dvh] overflow-y-auto custom-scroll relative">
+
+      <button id="modal-close-btn" aria-label="Đóng cửa sổ"
+              class="absolute top-4 right-4 w-9 h-9 rounded-2xl glass-subtle flex items-center justify-center text-sub hover:text-main hover:scale-105 transition">
+        ✕
+      </button>
+
+      <div class="pr-10 space-y-2">
+        <div id="modal-badges" class="flex flex-wrap items-center gap-1.5"></div>
+        <h3 id="modal-title" class="font-display text-xl sm:text-2xl font-extrabold text-main leading-snug"></h3>
+      </div>
+
+      <!-- 2 Tab: Thông tin & Ghi chú | Chỉnh sửa lịch -->
+      <div id="modal-mode-tabs" class="mt-4 glass-subtle p-1 rounded-2xl grid grid-cols-2 gap-1">
+        <button type="button" id="modal-tab-view"
+                class="py-2 px-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5">
+          <span>📋</span> Thông tin & Ghi chú
+        </button>
+        <button type="button" id="modal-tab-edit"
+                class="py-2 px-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5">
+          <span>✏️</span> Chỉnh sửa lịch
+        </button>
+      </div>
+
+      <!-- TAB 1: THÔNG TIN & GHI CHÚ -->
+      <div id="modal-view-panel" class="mt-4 space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm">
+          <div class="glass-subtle rounded-2xl p-3 sm:col-span-2">
+            <div class="text-[11px] font-bold uppercase tracking-wide text-dim">Mã lớp học phần</div>
+            <div class="flex items-center justify-between gap-2 mt-1">
+              <span id="view-code" class="font-bold text-main font-mono text-sm sm:text-base"></span>
+              <button type="button" id="copy-code-btn"
+                      class="px-3 py-1.5 rounded-xl text-xs font-bold transition hover:scale-105 active:scale-95 flex items-center gap-1"
+                      style="background: var(--accent-soft); color: var(--accent);">
+                <span>📋</span> Sao chép
+              </button>
+            </div>
+          </div>
+
+          <div class="glass-subtle rounded-2xl p-3">
+            <div class="text-[11px] font-bold uppercase tracking-wide text-dim">Ngày học</div>
+            <div id="view-day" class="font-bold text-main mt-1"></div>
+          </div>
+
+          <div class="glass-subtle rounded-2xl p-3">
+            <div class="text-[11px] font-bold uppercase tracking-wide text-dim">Ca / Tiết học</div>
+            <div id="view-slot" class="font-bold text-main mt-1"></div>
+          </div>
+
+          <div class="glass-subtle rounded-2xl p-3">
+            <div class="text-[11px] font-bold uppercase tracking-wide text-dim">Phòng học</div>
+            <div id="view-room" class="font-bold text-main mt-1"></div>
+          </div>
+
+          <div class="glass-subtle rounded-2xl p-3">
+            <div class="text-[11px] font-bold uppercase tracking-wide text-dim">Giảng viên</div>
+            <div id="view-lecturer" class="font-bold text-main mt-1"></div>
+          </div>
+
+          <div class="glass-subtle rounded-2xl p-3 sm:col-span-2">
+            <div class="text-[11px] font-bold uppercase tracking-wide text-dim">Tuần học & Ghi chú lịch</div>
+            <div id="view-weeks" class="font-bold text-main mt-1"></div>
+          </div>
+        </div>
+
+        <!-- Ghi chú cá nhân tự lưu -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between">
+            <label for="modal-note-input" class="text-xs font-extrabold uppercase tracking-wider text-main flex items-center gap-1.5">
+              <span>📝</span> Ghi chú cá nhân
+            </label>
+            <span id="note-save-status" class="text-[11px] font-semibold text-dim">Tự động lưu trên máy</span>
+          </div>
+
+          <textarea id="modal-note-input" rows="3"
+                    placeholder="Ghi nhắc mang laptop, hạn nộp bài tập, ngày kiểm tra giữa kỳ, lưu ý của giảng viên..."
+                    class="form-field font-normal resize-y"></textarea>
+
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex flex-wrap gap-1.5">
+              <button type="button" data-quick-note="💻 Nhớ mang laptop" class="quick-note-btn text-[11px] font-semibold px-2.5 py-1 rounded-full glass-subtle text-sub hover:text-main transition">
+                + Mang laptop
+              </button>
+              <button type="button" data-quick-note="📄 Có bài kiểm tra" class="quick-note-btn text-[11px] font-semibold px-2.5 py-1 rounded-full glass-subtle text-sub hover:text-main transition">
+                + Kiểm tra
+              </button>
+              <button type="button" data-quick-note="📌 Deadline bài tập" class="quick-note-btn text-[11px] font-semibold px-2.5 py-1 rounded-full glass-subtle text-sub hover:text-main transition">
+                + Bài tập
+              </button>
+            </div>
+            <button type="button" id="clear-note-btn" class="text-xs font-semibold text-rose-500 hover:underline px-1">
+              Xóa ghi chú
+            </button>
+          </div>
+        </div>
+
+        <div class="pt-3 border-t border-pink-300/25 flex flex-wrap items-center justify-between gap-2">
+          <button type="button" id="view-delete-custom-btn"
+                  class="hidden px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-500/15 text-rose-600 hover:bg-rose-500/25 transition">
+            🗑️ Xóa buổi này
+          </button>
+          <button type="button" id="quick-edit-btn"
+                  class="ml-auto px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold text-white shadow-sm hover:opacity-95 active:scale-95 transition flex items-center gap-1.5"
+                  style="background: var(--accent-gradient);">
+            <span>✏️</span> Sửa ngày / tiết / phòng
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB 2: CHỈNH SỬA LỊCH / THÊM BUỔI -->
+      <form id="modal-edit-form" class="hidden mt-4 space-y-3.5" novalidate>
+        <div id="custom-course-fields" class="hidden space-y-3 pb-2 border-b border-pink-300/25">
+          <div id="quick-preset-wrapper" class="space-y-1.5">
+            <label for="edit-preset" class="block text-xs font-bold text-sub">Chọn nhanh từ môn có sẵn (học bù):</label>
+            <select id="edit-preset" class="form-field text-xs">
+              <option value="">— Tự nhập môn mới / chọn môn để học bù —</option>
+            </select>
+          </div>
+
+          <div class="space-y-1.5">
+            <label for="edit-name" class="block text-xs font-bold text-main">Tên môn học / Buổi học <span class="text-rose-500">*</span></label>
+            <input id="edit-name" type="text" class="form-field" placeholder="VD: Học bù - Triết học Mác - Lênin" />
+          </div>
+
+          <div class="grid grid-cols-2 gap-2.5">
+            <div class="space-y-1.5">
+              <label for="edit-code" class="block text-xs font-bold text-sub">Mã LHP (tùy chọn)</label>
+              <input id="edit-code" type="text" class="form-field font-mono" placeholder="VD: 262101044358" />
+            </div>
+            <div class="space-y-1.5">
+              <label for="edit-credits" class="block text-xs font-bold text-sub">Số tín chỉ</label>
+              <input id="edit-credits" type="number" min="0" max="10" step="1" class="form-field" value="0" />
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-sub">Màu thẻ pastel</label>
+            <div id="tone-picker" class="flex flex-wrap gap-2">
+              <button type="button" data-tone-opt="tone-strawberry" class="tone-opt tone-strawberry w-8 h-8 rounded-xl border-2 transition" title="Hồng dâu"></button>
+              <button type="button" data-tone-opt="tone-sky" class="tone-opt tone-sky w-8 h-8 rounded-xl border-2 transition" title="Xanh trời"></button>
+              <button type="button" data-tone-opt="tone-lavender" class="tone-opt tone-lavender w-8 h-8 rounded-xl border-2 transition" title="Tím oải hương"></button>
+              <button type="button" data-tone-opt="tone-mint" class="tone-opt tone-mint w-8 h-8 rounded-xl border-2 transition" title="Xanh bạc hà"></button>
+              <button type="button" data-tone-opt="tone-peach" class="tone-opt tone-peach w-8 h-8 rounded-xl border-2 transition" title="Cam đào"></button>
+              <button type="button" data-tone-opt="tone-lemon" class="tone-opt tone-lemon w-8 h-8 rounded-xl border-2 transition" title="Vàng kem"></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="space-y-1.5">
+            <label for="edit-day" class="block text-xs font-bold text-main">Ngày học</label>
+            <select id="edit-day" class="form-field">
+              <option value="2">Thứ 2</option>
+              <option value="3">Thứ 3</option>
+              <option value="4">Thứ 4</option>
+              <option value="5">Thứ 5</option>
+              <option value="6">Thứ 6</option>
+              <option value="7">Thứ 7</option>
+              <option value="8">Chủ nhật</option>
+              <option value="unscheduled">Chưa xếp lịch (đưa xuống mục chờ)</option>
+            </select>
+          </div>
+
+          <div id="edit-slot-group" class="space-y-1.5">
+            <label for="edit-slot" class="block text-xs font-bold text-main">Tiết học</label>
+            <select id="edit-slot" class="form-field">
+              <option value="1">Tiết 1–3 (Sáng ca 1)</option>
+              <option value="2">Tiết 4–6 (Sáng ca 2)</option>
+              <option value="3">Tiết 7–9 (Chiều ca 1)</option>
+              <option value="4">Tiết 10–12 (Chiều ca 2)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Cảnh báo trùng lịch trực tiếp -->
+        <div id="overlap-warning"
+             class="hidden rounded-2xl p-3 text-xs font-semibold bg-amber-500/15 border border-amber-500/40 text-amber-800 flex items-start gap-2 leading-relaxed">
+          <span class="text-base leading-none shrink-0">⚠️</span>
+          <span id="overlap-warning-text"></span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="space-y-1.5">
+            <label for="edit-room" class="block text-xs font-bold text-main">Phòng học</label>
+            <input id="edit-room" type="text" class="form-field" placeholder="VD: G31, PM08, PM10, B37..." />
+          </div>
+
+          <div class="space-y-1.5">
+            <label for="edit-lecturer" class="block text-xs font-bold text-main">Giảng viên</label>
+            <input id="edit-lecturer" type="text" class="form-field" placeholder="Nhập tên giảng viên..." />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div class="space-y-1.5">
+            <label for="edit-week-start" class="block text-xs font-bold text-main">Tuần bắt đầu</label>
+            <input id="edit-week-start" type="number" min="1" max="52" class="form-field" />
+          </div>
+
+          <div class="space-y-1.5">
+            <label for="edit-week-end" class="block text-xs font-bold text-main">Tuần kết thúc</label>
+            <input id="edit-week-end" type="number" min="1" max="52" class="form-field" />
+          </div>
+        </div>
+
+        <div id="edit-error-msg"
+             class="hidden rounded-xl px-3 py-2 text-xs font-bold bg-rose-500/15 text-rose-600"></div>
+
+        <div class="pt-3 border-t border-pink-300/25 flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center gap-2">
+            <button type="button" id="edit-revert-btn"
+                    class="hidden px-3 py-2 rounded-xl text-xs font-bold glass-subtle text-sub hover:text-main transition">
+              ↺ Khôi phục môn này
+            </button>
+            <button type="button" id="edit-delete-btn"
+                    class="hidden px-3 py-2 rounded-xl text-xs font-bold bg-rose-500/15 text-rose-600 hover:bg-rose-500/25 transition">
+              🗑️ Xóa buổi
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2 ml-auto">
+            <button type="button" id="edit-cancel-btn"
+                    class="px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold glass-subtle text-sub hover:text-main transition">
+              Hủy
+            </button>
+            <button type="submit" id="edit-save-btn"
+                    class="px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold text-white shadow-sm hover:opacity-95 active:scale-95 transition flex items-center gap-1.5"
+                    style="background: var(--accent-gradient);">
+              <span>💾</span> Lưu thay đổi
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL XÁC NHẬN TÙY CHỈNH
+       ======================================================================== -->
+  <div id="confirm-modal"
+       class="modal-backdrop fixed inset-0 z-[60] flex items-center justify-center p-4 bg-rose-950/40 backdrop-blur-sm"
+       role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+    <div class="modal-panel w-full max-w-sm rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4">
+      <div class="space-y-2">
+        <div id="confirm-icon" class="w-11 h-11 rounded-2xl flex items-center justify-center text-xl" style="background: var(--accent-soft);">↺</div>
+        <h3 id="confirm-title" class="font-display text-lg font-extrabold text-main"></h3>
+        <p id="confirm-desc" class="text-xs sm:text-sm text-sub leading-relaxed"></p>
+      </div>
+      <div class="flex items-center justify-end gap-2 pt-2">
+        <button type="button" id="confirm-cancel-btn"
+                class="px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold glass-subtle text-sub hover:text-main transition">
+          Hủy bỏ
+        </button>
+        <button type="button" id="confirm-ok-btn"
+                class="px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold text-white shadow-sm hover:opacity-95 active:scale-95 transition">
+          Xác nhận
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast thông báo nổi -->
+  <div id="toast" class="toast-box fixed left-1/2 z-[70] px-4 py-2.5 rounded-2xl glass-strong text-xs sm:text-sm font-bold text-main shadow-xl flex items-center gap-2 max-w-[92vw]">
+    <span id="toast-icon" class="shrink-0">✨</span>
+    <span id="toast-msg" class="truncate">Đã lưu thay đổi</span>
+  </div>
+
+  <script>
+    /* ==========================================================================
+       1. DỮ LIỆU GỐC 6 HỌC PHẦN (17 TÍN CHỈ) — CHÍNH XÁC 100%
+       ========================================================================== */
+    const DEFAULT_SESSIONS = [
+      {
+        id: 'nghe-1',
+        name: 'Kỹ năng nghe - ghi chú tiếng Anh',
+        code: '262151024339',
+        credits: 3,
+        day: '2',
+        slot: '1', // Thứ 2, Tiết 1–3 (Sáng)
+        room: 'G31',
+        lecturer: 'Lê Anh Minh',
+        weekStart: 17,
+        weekEnd: 30,
+        tone: 'tone-sky',
+        icon: '🎧',
+        extraNote: '',
+        isCustom: false
+      },
+      {
+        id: 'triet-1',
+        name: 'Triết học Mác - Lênin',
+        code: '262101044378',
+        credits: 3,
+        day: '3',
+        slot: '4', // Thứ 3, Tiết 10–12 (Chiều)
+        room: 'B37',
+        lecturer: 'Phạm Văn Boong',
+        weekStart: 17,
+        weekEnd: 30,
+        tone: 'tone-strawberry',
+        icon: '📖',
+        extraNote: '',
+        isCustom: false
+      },
+      {
+        id: 'viet-1',
+        name: 'Kỹ năng Viết bài luận tiếng Anh',
+        code: '262151031309',
+        credits: 3,
+        day: '4',
+        slot: '1', // Thứ 4, Tiết 1–3 (Sáng)
+        room: 'G32',
+        lecturer: 'Trần Ngọc Hà',
+        weekStart: 17,
+        weekEnd: 30,
+        tone: 'tone-lavender',
+        icon: '✍️',
+        extraNote: '',
+        isCustom: false
+      },
+      {
+        id: 'ai-1',
+        name: 'Trí tuệ nhân tạo ứng dụng (Buổi 1)',
+        code: '2621200122191',
+        credits: 2,
+        day: '4',
+        slot: '4', // Thứ 4, Tiết 10–12 (Chiều) | Phòng PM08
+        room: 'PM08',
+        lecturer: 'Đỗ Văn Hào',
+        weekStart: 17,
+        weekEnd: 28,
+        tone: 'tone-mint',
+        icon: '🤖',
+        extraNote: 'Lưu ý: Buổi Thứ 4 học tại phòng PM08',
+        isCustom: false
+      },
+      {
+        id: 'ai-2',
+        name: 'Trí tuệ nhân tạo ứng dụng (Buổi 2)',
+        code: '2621200122191',
+        credits: 2,
+        day: '6',
+        slot: '4', // Thứ 6, Tiết 10–12 (Chiều) | Phòng PM10
+        room: 'PM10',
+        lecturer: 'Đỗ Văn Hào',
+        weekStart: 17,
+        weekEnd: 28,
+        tone: 'tone-mint',
+        icon: '🤖',
+        extraNote: 'Lưu ý: Buổi Thứ 6 học tại phòng PM10',
+        isCustom: false
+      },
+      {
+        id: 'doc-1',
+        name: 'Kỹ năng đọc phản biện 2',
+        code: '262151043335',
+        credits: 3,
+        day: '6',
+        slot: '3', // Thứ 6, Tiết 7–9 (Chiều)
+        room: 'G35',
+        lecturer: 'Lê Anh Minh',
+        weekStart: 17,
+        weekEnd: 30,
+        tone: 'tone-peach',
+        icon: '🧐',
+        extraNote: '',
+        isCustom: false
+      },
+      {
+        id: 'gdqp-1',
+        name: 'Giáo dục quốc phòng',
+        code: '262101003493',
+        credits: 3,
+        day: 'unscheduled',
+        slot: '',
+        room: 'Chưa cập nhật',
+        lecturer: 'Chưa cập nhật',
+        weekStart: 17,
+        weekEnd: 30,
+        tone: 'tone-lemon',
+        icon: '🪖',
+        extraNote: 'Chờ lịch học tập trung từ trường',
+        isCustom: false
+      }
+    ];
+
+    const DAYS = [
+      { id: '2', label: 'Thứ 2', short: 'T2' },
+      { id: '3', label: 'Thứ 3', short: 'T3' },
+      { id: '4', label: 'Thứ 4', short: 'T4' },
+      { id: '5', label: 'Thứ 5', short: 'T5' },
+      { id: '6', label: 'Thứ 6', short: 'T6' },
+      { id: '7', label: 'Thứ 7', short: 'T7' },
+      { id: '8', label: 'Chủ nhật', short: 'CN' }
+    ];
+
+    const SLOTS = [
+      { id: '1', period: 'Sáng', label: 'Tiết 1–3', fullLabel: 'Tiết 1–3 (Sáng ca 1)', icon: '🌤️' },
+      { id: '2', period: 'Sáng', label: 'Tiết 4–6', fullLabel: 'Tiết 4–6 (Sáng ca 2)', icon: '☀️' },
+      { id: '3', period: 'Chiều', label: 'Tiết 7–9', fullLabel: 'Tiết 7–9 (Chiều ca 1)', icon: '⛅' },
+      { id: '4', period: 'Chiều', label: 'Tiết 10–12', fullLabel: 'Tiết 10–12 (Chiều ca 2)', icon: '🌇' }
+    ];
+
+    const THEME_META_COLORS = {
+      pink: '#FFF5F9',
+      mint: '#F5FAF8',
+      lavender: '#F8F6FB',
+      peach: '#FCF8F5'
+    };
+
+    const STORAGE_KEYS = {
+      theme: 'tkb_candy_hk02_theme_v1',
+      motion: 'tkb_candy_hk02_motion_v1',
+      week: 'tkb_candy_hk02_week_v1',
+      notes: 'tkb_candy_hk02_notes_v1',
+      sessions: 'tkb_candy_hk02_sessions_v1'
+    };
+
+    /* ==========================================================================
+       2. TIỆN ÍCH LƯU TRỮ & XỬ LÝ DỮ LIỆU AN TOÀN
+       ========================================================================== */
+    function safeGet(key, fallback) {
+      try {
+        const val = localStorage.getItem(key);
+        return val !== null ? val : fallback;
+      } catch (e) {
+        return fallback;
+      }
+    }
+
+    function safeSet(key, val) {
+      try {
+        localStorage.setItem(key, val);
+      } catch (e) {
+        // Bỏ qua an toàn nếu trình duyệt chặn storage
+      }
+    }
+
+    function cloneDefaultSessions() {
+      return DEFAULT_SESSIONS.map(item => ({ ...item }));
+    }
+
+    function loadSessions() {
+      try {
+        const raw = safeGet(STORAGE_KEYS.sessions, null);
+        if (!raw) return cloneDefaultSessions();
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed) || parsed.length === 0) return cloneDefaultSessions();
+        return parsed.map(item => ({
+          id: String(item.id || ('custom-' + Date.now())),
+          name: String(item.name || 'Buổi học'),
+          code: String(item.code || ''),
+          credits: Number.isFinite(Number(item.credits)) ? Number(item.credits) : 0,
+          day: String(item.day || 'unscheduled'),
+          slot: item.day === 'unscheduled' ? '' : String(item.slot || '1'),
+          room: String(item.room || 'Chưa cập nhật'),
+          lecturer: String(item.lecturer || 'Chưa cập nhật'),
+          weekStart: Math.min(52, Math.max(1, parseInt(item.weekStart, 10) || 17)),
+          weekEnd: Math.min(52, Math.max(1, parseInt(item.weekEnd, 10) || 30)),
+          tone: String(item.tone || 'tone-strawberry'),
+          icon: String(item.icon || '🍬'),
+          extraNote: String(item.extraNote || ''),
+          isCustom: Boolean(item.isCustom)
+        }));
+      } catch (e) {
+        return cloneDefaultSessions();
+      }
+    }
+
+    function saveSessions() {
+      safeSet(STORAGE_KEYS.sessions, JSON.stringify(state.sessions));
+    }
+
+    function loadNotes() {
+      try {
+        return JSON.parse(safeGet(STORAGE_KEYS.notes, '{}')) || {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function getTodayDayId() {
+      const jsDay = new Date().getDay();
+      return String(jsDay === 0 ? 8 : jsDay + 1);
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str == null ? '' : String(str);
+      return div.innerHTML;
+    }
+
+    function isSessionModified(session) {
+      if (session.isCustom) return false;
+      const orig = DEFAULT_SESSIONS.find(d => d.id === session.id);
+      if (!orig) return false;
+      return (
+        session.day !== orig.day ||
+        session.slot !== orig.slot ||
+        session.room.trim() !== orig.room.trim() ||
+        session.lecturer.trim() !== orig.lecturer.trim() ||
+        Number(session.weekStart) !== Number(orig.weekStart) ||
+        Number(session.weekEnd) !== Number(orig.weekEnd)
+      );
+    }
+
+    function hasAnyScheduleChanges() {
+      if (state.sessions.some(s => s.isCustom || isSessionModified(s))) return true;
+      if (state.sessions.length !== DEFAULT_SESSIONS.length) return true;
+      return false;
+    }
+
+    function getSessionWeekStatus(session, week) {
+      if (week > session.weekEnd) {
+        return { active: false, badge: `Đã xong (hết tuần ${session.weekEnd})` };
+      }
+      if (week < session.weekStart) {
+        return { active: false, badge: `Chưa bắt đầu (từ tuần ${session.weekStart})` };
+      }
+      return { active: true, badge: '' };
+    }
+
+    function getNoteKey(session) {
+      return session.code && session.code.trim() ? session.code.trim() : session.id;
+    }
+
+    function hasNote(session) {
+      const key = getNoteKey(session);
+      return Boolean(state.notes[key] && state.notes[key].trim().length > 0);
+    }
+
+    function getDayLabel(dayId) {
+      if (dayId === 'unscheduled') return 'Chưa xếp lịch (Mục chờ)';
+      const d = DAYS.find(item => item.id === dayId);
+      return d ? d.label : 'Chưa xếp lịch';
+    }
+
+    function getSlotObj(slotId) {
+      return SLOTS.find(item => item.id === slotId) || null;
+    }
+
+    function getSessionsAt(dayId, slotId) {
+      return state.sessions.filter(s => s.day === dayId && s.slot === slotId);
+    }
+
+    function getSessionsForDay(dayId) {
+      const list = [];
+      SLOTS.forEach(slot => {
+        const matched = getSessionsAt(dayId, slot.id);
+        matched.forEach(session => list.push({ slot, session }));
+      });
+      return list;
+    }
+
+    function getUnscheduledSessions() {
+      return state.sessions.filter(s => s.day === 'unscheduled' || !s.slot);
+    }
+
+    const state = {
+      theme: safeGet(STORAGE_KEYS.theme, 'pink'),
+      motionEnabled: safeGet(STORAGE_KEYS.motion, 'true') !== 'false',
+      week: Math.min(30, Math.max(17, parseInt(safeGet(STORAGE_KEYS.week, '17'), 10) || 17)),
+      activeTab: 'grid',
+      mobileViewMode: 'day',
+      todayId: getTodayDayId(),
+      selectedMobileDay: getTodayDayId(),
+      sessions: loadSessions(),
+      notes: loadNotes(),
+      modalSessionId: null,
+      modalIsAdding: false,
+      modalMode: 'view',
+      selectedTone: 'tone-strawberry',
+      confirmAction: null
+    };
+
+    /* ==========================================================================
+       3. TỰ VẼ ICON LỊCH PASTEL HỒNG "TKB HK02" (180x180PX) & MANIFEST PWA
+       ========================================================================== */
+    function drawRoundedRectPath(ctx, x, y, width, height, radius) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+    }
+
+    function generatePastelPinkIcon(size = 180) {
+      const iconCanvas = document.createElement('canvas');
+      iconCanvas.width = size;
+      iconCanvas.height = size;
+      const c = iconCanvas.getContext('2d');
+      const s = size / 180;
+      c.scale(s, s);
+
+      // Nền gradient Bubblegum Pink dịu mắt
+      const bgGrad = c.createLinearGradient(0, 0, 180, 180);
+      bgGrad.addColorStop(0, '#FFF5F9');
+      bgGrad.addColorStop(0.5, '#FCE7F1');
+      bgGrad.addColorStop(1, '#F5C2D7');
+      drawRoundedRectPath(c, 0, 0, 180, 180, 42);
+      c.fillStyle = bgGrad;
+      c.fill();
+
+      // Bong bóng sáng nhẹ
+      c.fillStyle = 'rgba(255, 255, 255, 0.55)';
+      c.beginPath();
+      c.arc(36, 34, 44, 0, Math.PI * 2);
+      c.fill();
+      c.fillStyle = 'rgba(255, 255, 255, 0.35)';
+      c.beginPath();
+      c.arc(150, 150, 38, 0, Math.PI * 2);
+      c.fill();
+
+      // Cuốn lịch trắng hồng đổ bóng mềm
+      c.save();
+      c.shadowColor = 'rgba(238, 153, 189, 0.28)';
+      c.shadowBlur = 16;
+      c.shadowOffsetY = 6;
+      drawRoundedRectPath(c, 28, 34, 124, 118, 24);
+      c.fillStyle = '#FFFDFD';
+      c.fill();
+      c.restore();
+
+      // Phần gáy lịch Bubblegum Pink
+      c.save();
+      drawRoundedRectPath(c, 28, 34, 124, 118, 24);
+      c.clip();
+      const topGrad = c.createLinearGradient(28, 34, 152, 74);
+      topGrad.addColorStop(0, '#F4AFCE');
+      topGrad.addColorStop(1, '#EE99BD');
+      c.fillStyle = topGrad;
+      c.fillRect(28, 34, 124, 38);
+      c.restore();
+
+      // 2 móc ghim lịch
+      [60, 120].forEach(cx => {
+        drawRoundedRectPath(c, cx - 7, 22, 14, 24, 7);
+        c.fillStyle = '#FFFDFD';
+        c.fill();
+        c.strokeStyle = 'rgba(238, 153, 189, 0.55)';
+        c.lineWidth = 2;
+        c.stroke();
+      });
+
+      // Các ô màu pastel sữa mini
+      ['#F5E6EB', '#E6EFF6', '#ECE7F5', '#E4F0EB'].forEach((col, i) => {
+        drawRoundedRectPath(c, 44 + i * 24, 83, 18, 12, 5);
+        c.fillStyle = col;
+        c.fill();
+      });
+
+      c.fillStyle = '#FFFFFF';
+      c.font = '700 13px "Be Vietnam Pro", sans-serif';
+      c.textAlign = 'center';
+      c.textBaseline = 'middle';
+      c.fillText('HK02', 90, 55);
+
+      c.fillStyle = '#4A283A';
+      c.font = '800 34px "Be Vietnam Pro", "Quicksand", sans-serif';
+      c.fillText('TKB', 90, 124);
+
+      return iconCanvas.toDataURL('image/png');
+    }
+
+    let currentManifestBlobUrl = null;
+    function setupPwaAssets(themeName) {
+      try {
+        const icon180 = generatePastelPinkIcon(180);
+        const icon512 = generatePastelPinkIcon(512);
+
+        const appleIcon = document.getElementById('apple-touch-icon');
+        const favIcon = document.getElementById('favicon-link');
+        if (appleIcon) appleIcon.href = icon180;
+        if (favIcon) favIcon.href = icon180;
+
+        const themeColor = THEME_META_COLORS[themeName] || '#fff0f5';
+        const manifestObj = {
+          name: 'Thời Khóa Biểu HK02',
+          short_name: 'TKB HK02',
+          description: 'Thời Khóa Biểu HK02 • Năm học 2026–2027 • Lớp A26303',
+          start_url: window.location.href,
+          display: 'standalone',
+          orientation: 'portrait-primary',
+          background_color: themeColor,
+          theme_color: themeColor,
+          icons: [
+            { src: icon180, sizes: '180x180', type: 'image/png', purpose: 'any maskable' },
+            { src: icon512, sizes: '512x512', type: 'image/png', purpose: 'any maskable' }
+          ]
+        };
+
+        const manifestLink = document.getElementById('manifest-link');
+        if (manifestLink) {
+          if (currentManifestBlobUrl) URL.revokeObjectURL(currentManifestBlobUrl);
+          const blob = new Blob([JSON.stringify(manifestObj)], { type: 'application/manifest+json' });
+          currentManifestBlobUrl = URL.createObjectURL(blob);
+          manifestLink.href = currentManifestBlobUrl;
+        }
+      } catch (e) {
+        // Bỏ qua an toàn nếu trình duyệt hạn chế Blob/Canvas
+      }
+    }
+
+    /* ==========================================================================
+       4. TOAST THÔNG BÁO & SAO CHÉP AN TOÀN
+       ========================================================================== */
+    let toastTimer = null;
+    function showToast(msg, icon = '✨') {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      document.getElementById('toast-icon').textContent = icon;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2600);
+    }
+
+    function copyTextSafe(text) {
+      if (!text || text === '—') {
+        showToast('Buổi học này chưa có mã LHP để sao chép', 'ℹ️');
+        return;
+      }
+      try {
+        const temp = document.createElement('textarea');
+        temp.value = text;
+        temp.setAttribute('readonly', '');
+        temp.style.position = 'fixed';
+        temp.style.opacity = '0';
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+        showToast(`Đã sao chép mã LHP: ${text}`, '📋');
+      } catch (e) {
+        showToast('Không thể sao chép tự động, cậu bôi đen mã nhé!', 'ℹ️');
+      }
+    }
+
+    /* ==========================================================================
+       5. CHỦ ĐỀ, NỀN ĐỘNG & TOÀN MÀN HÌNH
+       ========================================================================== */
+    function applyTheme(themeName) {
+      const validTheme = THEME_META_COLORS[themeName] ? themeName : 'pink';
+      state.theme = validTheme;
+      document.documentElement.setAttribute('data-theme', validTheme);
+      safeSet(STORAGE_KEYS.theme, validTheme);
+
+      const metaTheme = document.getElementById('meta-theme-color');
+      if (metaTheme) metaTheme.setAttribute('content', THEME_META_COLORS[validTheme]);
+
+      document.querySelectorAll('[data-theme-btn]').forEach(btn => {
+        const isActive = btn.getAttribute('data-theme-btn') === validTheme;
+        btn.style.background = isActive ? 'var(--accent-gradient)' : 'transparent';
+        btn.style.color = isActive ? '#ffffff' : 'var(--text-secondary)';
+        btn.classList.toggle('shadow-sm', isActive);
+      });
+
+      setupPwaAssets(validTheme);
+      initCanvasParticles();
+    }
+
+    function applyMotion(enabled) {
+      state.motionEnabled = enabled;
+      safeSet(STORAGE_KEYS.motion, String(enabled));
+      document.body.classList.toggle('motion-off', !enabled);
+      document.getElementById('motion-label').textContent = enabled ? 'Nền động: Bật' : 'Nền động: Tắt';
+      document.getElementById('motion-icon').textContent = enabled ? '💫' : '⏸️';
+      if (enabled) startCanvasLoop();
+      else stopCanvasLoop();
+    }
+
+    function updateFullscreenButton() {
+      const isFs = Boolean(document.fullscreenElement || document.webkitFullscreenElement);
+      document.getElementById('fullscreen-label').textContent = isFs ? 'Thu nhỏ' : 'Toàn màn hình';
+      document.getElementById('fullscreen-icon').textContent = isFs ? '🗗' : '⛶';
+    }
+
+    function toggleFullscreen() {
+      const docEl = document.documentElement;
+      const isFs = Boolean(document.fullscreenElement || document.webkitFullscreenElement);
+      try {
+        if (!isFs) {
+          if (docEl.requestFullscreen) {
+            docEl.requestFullscreen().catch(() => {
+              showToast('Trên iPhone, bấm Chia sẻ → Thêm vào Màn hình chính để mở toàn màn hình nhé!', '📱');
+            });
+          } else if (docEl.webkitRequestFullscreen) {
+            docEl.webkitRequestFullscreen();
+          } else {
+            showToast('Trên iPhone, bấm Chia sẻ → Thêm vào Màn hình chính để mở toàn màn hình nhé!', '📱');
+          }
+        } else {
+          if (document.exitFullscreen) document.exitFullscreen();
+          else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        }
+      } catch (e) {
+        showToast('Bấm Chia sẻ → Thêm vào Màn hình chính để mở như ứng dụng toàn màn hình!', '📱');
+      }
+    }
+
+    function detectStandaloneMode() {
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+      if (isStandalone) {
+        document.getElementById('standalone-badge').classList.remove('hidden');
+        document.getElementById('fullscreen-btn').classList.add('hidden');
+      }
+    }
+
+    /* ==========================================================================
+       6. RENDER GIAO DIỆN CHÍNH
+       ========================================================================== */
+    function renderAll() {
+      document.getElementById('edited-summary-badge').classList.toggle('hidden', !hasAnyScheduleChanges());
+      renderWeekStatus();
+      renderTodayBanner();
+      renderDesktopGrid();
+      renderMobileDayPills();
+      renderMobileDayView();
+      renderCourseList();
+      renderUnscheduledSection();
+    }
+
+    function renderWeekStatus() {
+      const slider = document.getElementById('week-slider');
+      const badge = document.getElementById('week-badge');
+      const statusNote = document.getElementById('week-status-note');
+
+      slider.value = state.week;
+      badge.textContent = `Tuần ${state.week}`;
+      safeSet(STORAGE_KEYS.week, String(state.week));
+
+      const scheduled = state.sessions.filter(s => s.day !== 'unscheduled' && s.slot);
+      const activeCount = scheduled.filter(s => getSessionWeekStatus(s, state.week).active).length;
+      const inactiveCount = scheduled.length - activeCount;
+
+      if (inactiveCount > 0) {
+        statusNote.textContent = `${activeCount} buổi đang học • ${inactiveCount} buổi đã xong / ngoài tuần`;
+      } else {
+        statusNote.textContent = `${activeCount} buổi học cố định trong tuần ${state.week}`;
+      }
+    }
+
+    function renderTodayBanner() {
+      const now = new Date();
+      const dayObj = DAYS.find(d => d.id === state.todayId);
+      const dateStr = now.toLocaleDateString('vi-VN', {
+        weekday: 'long',
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      });
+
+      document.getElementById('today-date-text').textContent =
+        `${dateStr.charAt(0).toUpperCase() + dateStr.slice(1)} • Đang xem Tuần ${state.week}`;
+
+      const sessions = getSessionsForDay(state.todayId);
+      const activeSessions = sessions.filter(item => getSessionWeekStatus(item.session, state.week).active);
+
+      const headlineEl = document.getElementById('today-headline');
+      const subtextEl = document.getElementById('today-subtext');
+      const listEl = document.getElementById('today-courses-list');
+      listEl.innerHTML = '';
+
+      if (sessions.length === 0) {
+        headlineEl.textContent = `${dayObj.label} trống lịch toàn tập — tha hồ nghỉ ngơi hoặc tự học!`;
+        subtextEl.textContent = 'Không có buổi học nào xếp trong ngày này. Bấm "+ Thêm buổi" nếu có lịch học bù nhé.';
+        listEl.innerHTML = `
+          <div class="glass-subtle rounded-2xl px-4 py-2.5 text-xs sm:text-sm font-bold text-main flex items-center gap-2">
+            <span>🍬</span> Không có tiết học hôm nay
+          </div>
+        `;
+        return;
+      }
+
+      if (activeSessions.length === 0) {
+        headlineEl.textContent = `${dayObj.label} (Tuần ${state.week}): Nhẹ gánh rồi, các buổi học ngày này đã xong!`;
+        subtextEl.textContent = 'Kéo thanh tuần học để xem lịch của các tuần khác.';
+      } else if (activeSessions.length === 1) {
+        const item = activeSessions[0];
+        headlineEl.textContent = `${dayObj.label} có 1 ca: ${item.session.name}`;
+        subtextEl.textContent = `${item.slot.period} (${item.slot.label}) • Phòng ${item.session.room} • GV: ${item.session.lecturer}`;
+      } else {
+        headlineEl.textContent = `${dayObj.label} có ${activeSessions.length} ca học trong Tuần ${state.week}`;
+        subtextEl.textContent = activeSessions.map(x => `${x.slot.label} (${x.session.room})`).join(' • ');
+      }
+
+      sessions.forEach(item => {
+        const status = getSessionWeekStatus(item.session, state.week);
+        const modified = isSessionModified(item.session);
+        const btn = document.createElement('button');
+        btn.className = `course-card ${item.session.tone} ${!status.active ? 'course-inactive' : ''} rounded-2xl px-3.5 py-2.5 text-left flex items-center gap-2.5 shadow-sm`;
+        btn.innerHTML = `
+          <span class="text-lg">${escapeHtml(item.session.icon)}</span>
+          <div>
+            <div class="text-xs font-extrabold leading-tight flex flex-wrap items-center gap-1.5">
+              <span>${escapeHtml(item.session.name)}</span>
+              ${modified ? '<span class="px-1.5 py-0.2 rounded-md bg-white/70 text-[10px]">Đã sửa</span>' : ''}
+              ${item.session.isCustom ? '<span class="px-1.5 py-0.2 rounded-md bg-white/70 text-[10px]">Mới</span>' : ''}
+              ${hasNote(item.session) ? '<span title="Có ghi chú cá nhân">📝</span>' : ''}
+            </div>
+            <div class="text-[11px] opacity-85 font-semibold mt-0.5">
+              ${item.slot.label} • Phòng ${escapeHtml(item.session.room)} ${!status.active ? '• ' + escapeHtml(status.badge) : ''}
+            </div>
+          </div>
+        `;
+        btn.addEventListener('click', () => openSessionModal(item.session.id, 'view'));
+        listEl.appendChild(btn);
+      });
+    }
+
+    function renderDesktopGrid() {
+      const headerEl = document.getElementById('grid-header');
+      const bodyEl = document.getElementById('grid-body');
+
+      let headerHtml = `
+        <div class="sticky-slot-col rounded-2xl p-2.5 flex items-center justify-center text-xs font-extrabold uppercase tracking-wider text-dim">
+          Ca / Tiết
+        </div>
+      `;
+
+      DAYS.forEach(day => {
+        const isToday = day.id === state.todayId;
+        const activeInDay = getSessionsForDay(day.id).filter(x => getSessionWeekStatus(x.session, state.week).active).length;
+
+        headerHtml += `
+          <div class="rounded-2xl p-2.5 text-center transition-all ${isToday ? 'today-column-header' : 'glass-subtle'}">
+            <div class="font-display font-extrabold text-sm">${day.label}</div>
+            ${isToday
+              ? '<div class="text-[10px] font-bold uppercase tracking-wider opacity-95 mt-0.5">★ Hôm nay</div>'
+              : `<div class="text-[10px] font-semibold text-dim mt-0.5">${activeInDay > 0 ? `${activeInDay} buổi` : 'Trống'}</div>`
+            }
+          </div>
+        `;
+      });
+      headerEl.innerHTML = headerHtml;
+
+      bodyEl.innerHTML = '';
+      let staggerIndex = 0;
+
+      SLOTS.forEach(slot => {
+        const row = document.createElement('div');
+        row.className = 'grid grid-cols-[104px_repeat(7,minmax(0,1fr))] gap-2.5 items-stretch';
+
+        const slotCell = document.createElement('div');
+        slotCell.className = 'sticky-slot-col rounded-2xl p-2.5 flex flex-col items-center justify-center text-center';
+        slotCell.innerHTML = `
+          <span class="text-base mb-0.5">${slot.icon}</span>
+          <span class="text-[11px] font-extrabold uppercase tracking-wider" style="color: var(--accent);">${slot.period}</span>
+          <span class="text-xs font-bold text-main mt-0.5">${slot.label}</span>
+        `;
+        row.appendChild(slotCell);
+
+        DAYS.forEach(day => {
+          const isToday = day.id === state.todayId;
+          const cell = document.createElement('div');
+          cell.className = `rounded-2xl p-2 min-h-[126px] flex flex-col justify-center gap-2 transition-all ${isToday ? 'today-cell' : 'glass-subtle'}`;
+
+          const cellSessions = getSessionsAt(day.id, slot.id);
+          const dayHasAnySession = getSessionsForDay(day.id).length > 0;
+
+          if (cellSessions.length > 0) {
+            cellSessions.forEach(session => {
+              const status = getSessionWeekStatus(session, state.week);
+              const modified = isSessionModified(session);
+              const noted = hasNote(session);
+
+              const card = document.createElement('div');
+              card.className = `course-card stagger-item ${session.tone} ${!status.active ? 'course-inactive' : ''} rounded-2xl p-2.5 flex flex-col justify-between gap-2 ${cellSessions.length === 1 ? 'h-full' : ''}`;
+              card.style.setProperty('--stagger-idx', staggerIndex++);
+              card.setAttribute('role', 'button');
+              card.setAttribute('tabindex', '0');
+
+              card.innerHTML = `
+                <div class="space-y-1.5">
+                  <div class="flex items-start justify-between gap-1">
+                    <div class="flex items-center gap-1 flex-wrap">
+                      <span class="text-sm leading-none">${escapeHtml(session.icon)}</span>
+                      ${modified ? '<span class="px-1.5 py-0.5 rounded-md bg-white/75 text-[9px] font-extrabold uppercase tracking-tight">Đã sửa</span>' : ''}
+                      ${session.isCustom ? '<span class="px-1.5 py-0.5 rounded-md bg-white/75 text-[9px] font-extrabold uppercase tracking-tight">Mới</span>' : ''}
+                    </div>
+                    <div class="flex items-center gap-1 shrink-0">
+                      ${noted ? '<span class="px-1 py-0.5 rounded-md bg-white/65 text-[10px]" title="Có ghi chú cá nhân">📝</span>' : ''}
+                      <span class="px-1.5 py-0.5 rounded-lg bg-white/70 text-[10px] font-extrabold">
+                        ${escapeHtml(session.room)}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="font-display font-extrabold text-[12.5px] leading-snug">
+                    ${escapeHtml(session.name)}
+                  </div>
+                </div>
+
+                <div class="space-y-1 pt-1 border-t border-current/15">
+                  <div class="text-[11px] font-semibold opacity-90 truncate" title="${escapeHtml(session.lecturer)}">
+                    👤 ${escapeHtml(session.lecturer)}
+                  </div>
+                  <div class="flex items-center justify-between gap-1 text-[10px] font-bold opacity-80">
+                    <span>T${session.weekStart}–${session.weekEnd}</span>
+                    ${session.credits > 0 ? `<span>${session.credits} STC</span>` : '<span>Học bù</span>'}
+                  </div>
+                  ${!status.active
+                    ? `<div class="mt-1 px-2 py-0.5 rounded-lg bg-slate-900/10 text-[10px] font-extrabold text-center leading-tight">${escapeHtml(status.badge)}</div>`
+                    : ''
+                  }
+                </div>
+              `;
+
+              card.addEventListener('click', () => openSessionModal(session.id, 'view'));
+              card.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  openSessionModal(session.id, 'view');
+                }
+              });
+
+              cell.appendChild(card);
+            });
+          } else if (!dayHasAnySession && slot.id === '2') {
+            cell.innerHTML = `
+              <div class="text-center px-1 opacity-65 select-none">
+                <div class="text-base mb-1">${day.id === '7' || day.id === '8' ? '🧸' : '🌸'}</div>
+                <div class="text-[11px] font-bold text-sub">${day.id === '7' || day.id === '8' ? 'Cuối tuần nghỉ ngơi' : 'Trống trọn ngày'}</div>
+              </div>
+            `;
+          } else {
+            cell.innerHTML = `<div class="text-center text-xs text-dim opacity-35 select-none">—</div>`;
+          }
+
+          row.appendChild(cell);
+        });
+
+        bodyEl.appendChild(row);
+      });
+    }
+
+    function renderMobileDayPills() {
+      const pillsEl = document.getElementById('mobile-day-pills');
+      pillsEl.innerHTML = '';
+
+      DAYS.forEach(day => {
+        const isSelected = day.id === state.selectedMobileDay;
+        const isToday = day.id === state.todayId;
+        const activeCount = getSessionsForDay(day.id).filter(x => getSessionWeekStatus(x.session, state.week).active).length;
+
+        const btn = document.createElement('button');
+        btn.className = `shrink-0 px-3.5 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+          isSelected ? 'text-white shadow-md scale-[1.03]' : 'glass-subtle text-sub'
+        }`;
+        if (isSelected) btn.style.background = 'var(--accent-gradient)';
+
+        btn.innerHTML = `
+          <span>${day.short}</span>
+          ${isToday ? '<span class="w-1.5 h-1.5 rounded-full bg-current"></span>' : ''}
+          ${activeCount > 0 ? `<span class="px-1.5 rounded-full text-[10px] ${isSelected ? 'bg-white/25' : 'bg-black/10'}">${activeCount}</span>` : ''}
+        `;
+
+        btn.addEventListener('click', () => {
+          state.selectedMobileDay = day.id;
+          renderMobileDayPills();
+          renderMobileDayView();
+        });
+
+        pillsEl.appendChild(btn);
+      });
+    }
+
+    function renderMobileDayView() {
+      const container = document.getElementById('mobile-day-view');
+      const day = DAYS.find(d => d.id === state.selectedMobileDay);
+      const isToday = day.id === state.todayId;
+      const daySessions = getSessionsForDay(day.id);
+
+      container.innerHTML = `
+        <div class="flex items-center justify-between px-1">
+          <h3 class="font-display text-lg font-extrabold text-main flex items-center gap-2">
+            <span>${day.label}</span>
+            ${isToday ? '<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold text-white" style="background: var(--accent-gradient);">Hôm nay</span>' : ''}
+          </h3>
+          <span class="text-xs font-semibold text-sub">Tuần ${state.week}</span>
+        </div>
+      `;
+
+      if (daySessions.length === 0) {
+        const emptyCard = document.createElement('div');
+        emptyCard.className = 'glass-card stagger-item rounded-3xl p-6 text-center space-y-2';
+        emptyCard.innerHTML = `
+          <div class="text-3xl">${day.id === '7' || day.id === '8' ? '🧸' : '🌸'}</div>
+          <div class="font-display text-base font-extrabold text-main">${day.id === '7' || day.id === '8' ? 'Cuối tuần nghỉ ngơi' : 'Trống trọn ngày'}</div>
+          <p class="text-xs text-sub">Không có buổi học nào trong ${day.label}. Cậu có thể chuyển môn khác sang đây hoặc bấm "+ Thêm buổi" nếu học bù.</p>
+        `;
+        container.appendChild(emptyCard);
+        return;
+      }
+
+      SLOTS.forEach((slot, idx) => {
+        const slotSessions = getSessionsAt(day.id, slot.id);
+        const wrapper = document.createElement('div');
+        wrapper.className = 'stagger-item space-y-2';
+        wrapper.style.setProperty('--stagger-idx', idx);
+
+        if (slotSessions.length > 0) {
+          slotSessions.forEach(session => {
+            const status = getSessionWeekStatus(session, state.week);
+            const modified = isSessionModified(session);
+            const noted = hasNote(session);
+
+            const card = document.createElement('div');
+            card.className = `course-card ${session.tone} ${!status.active ? 'course-inactive' : ''} rounded-3xl p-4 space-y-2.5 shadow-sm`;
+            card.innerHTML = `
+              <div class="flex items-center justify-between gap-2 flex-wrap">
+                <span class="text-xs font-extrabold px-2.5 py-1 rounded-xl bg-white/65">
+                  ${slot.icon} ${slot.period} • ${slot.label}
+                </span>
+                <div class="flex items-center gap-1.5">
+                  ${modified ? '<span class="px-2 py-0.5 rounded-lg bg-white/75 text-[11px] font-extrabold">Đã sửa</span>' : ''}
+                  ${session.isCustom ? '<span class="px-2 py-0.5 rounded-lg bg-white/75 text-[11px] font-extrabold">Mới</span>' : ''}
+                  ${noted ? '<span class="px-2 py-0.5 rounded-lg bg-white/65 text-xs font-bold">📝</span>' : ''}
+                  <span class="px-2.5 py-1 rounded-xl bg-white/75 text-xs font-extrabold">
+                    Phòng ${escapeHtml(session.room)}
+                  </span>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-2.5">
+                <span class="text-2xl">${escapeHtml(session.icon)}</span>
+                <div>
+                  <h4 class="font-display text-base font-extrabold leading-snug">${escapeHtml(session.name)}</h4>
+                  <p class="text-xs font-semibold opacity-90 mt-0.5">
+                    GV: ${escapeHtml(session.lecturer)} • ${session.credits > 0 ? session.credits + ' STC • ' : ''}Tuần ${session.weekStart}–${session.weekEnd}
+                  </p>
+                </div>
+              </div>
+
+              ${!status.active
+                ? `<div class="px-3 py-1.5 rounded-xl bg-slate-900/10 text-xs font-extrabold text-center">${escapeHtml(status.badge)}</div>`
+                : ''
+              }
+            `;
+            card.addEventListener('click', () => openSessionModal(session.id, 'view'));
+            wrapper.appendChild(card);
+          });
+        } else {
+          wrapper.innerHTML = `
+            <div class="glass-subtle rounded-2xl px-4 py-2.5 flex items-center justify-between text-xs text-dim">
+              <span>${slot.icon} ${slot.period} • ${slot.label}</span>
+              <span class="font-semibold">Trống</span>
+            </div>
+          `;
+        }
+
+        container.appendChild(wrapper);
+      });
+    }
+
+    function updateMobileViewModeUI() {
+      const dayBtn = document.getElementById('mobile-mode-day');
+      const gridBtn = document.getElementById('mobile-mode-grid');
+      const dayPills = document.getElementById('mobile-day-pills');
+      const dayView = document.getElementById('mobile-day-view');
+      const desktopWrapper = document.getElementById('desktop-grid-wrapper');
+
+      const isDayMode = state.mobileViewMode === 'day';
+      dayBtn.style.background = isDayMode ? 'var(--accent-gradient)' : 'transparent';
+      dayBtn.style.color = isDayMode ? '#ffffff' : 'var(--text-secondary)';
+      gridBtn.style.background = !isDayMode ? 'var(--accent-gradient)' : 'transparent';
+      gridBtn.style.color = !isDayMode ? '#ffffff' : 'var(--text-secondary)';
+
+      dayPills.classList.toggle('hidden', !isDayMode);
+      dayView.classList.toggle('hidden', !isDayMode);
+
+      if (isDayMode) {
+        desktopWrapper.classList.add('hidden', 'md:block');
+        desktopWrapper.classList.remove('block');
+      } else {
+        desktopWrapper.classList.remove('hidden');
+        desktopWrapper.classList.add('block');
+      }
+    }
+
+    function renderCourseList() {
+      const container = document.getElementById('course-list-container');
+      container.innerHTML = '';
+
+      state.sessions.forEach((session, idx) => {
+        const status = session.day === 'unscheduled'
+          ? { active: true, badge: '' }
+          : getSessionWeekStatus(session, state.week);
+        const modified = isSessionModified(session);
+        const noted = hasNote(session);
+        const slotObj = getSlotObj(session.slot);
+
+        const card = document.createElement('article');
+        card.className = `course-card stagger-item glass-card ${!status.active ? 'course-inactive' : ''} rounded-3xl p-5 flex flex-col justify-between gap-4`;
+        card.style.setProperty('--stagger-idx', idx);
+
+        card.innerHTML = `
+          <div class="space-y-3">
+            <div class="flex items-start justify-between gap-2">
+              <div class="${session.tone} w-11 h-11 rounded-2xl flex items-center justify-center text-xl shadow-sm">
+                ${escapeHtml(session.icon)}
+              </div>
+              <div class="flex flex-wrap items-center justify-end gap-1.5">
+                ${modified ? '<span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-500/20 text-amber-800">Đã sửa</span>' : ''}
+                ${session.isCustom ? '<span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-sky-500/20 text-sky-800">Buổi thêm</span>' : ''}
+                ${noted ? '<span class="px-2 py-0.5 rounded-full text-[11px] font-bold glass-subtle text-main">📝 Ghi chú</span>' : ''}
+                ${session.credits > 0
+                  ? `<span class="px-2.5 py-1 rounded-full text-xs font-extrabold text-white" style="background: var(--accent-gradient);">${session.credits} STC</span>`
+                  : ''
+                }
+              </div>
+            </div>
+
+            <div>
+              <div class="text-[11px] font-bold font-mono text-dim">${session.code ? 'Mã LHP: ' + escapeHtml(session.code) : 'Buổi học bổ sung'}</div>
+              <h3 class="font-display text-lg font-extrabold text-main mt-0.5 leading-snug">${escapeHtml(session.name)}</h3>
+            </div>
+
+            <div class="space-y-1.5 text-xs sm:text-sm text-sub">
+              <div class="flex items-center gap-2">
+                <span>🗓️</span>
+                <span class="font-semibold text-main">
+                  ${session.day === 'unscheduled'
+                    ? 'Chưa xếp lịch tuần cố định'
+                    : `${getDayLabel(session.day)} • ${slotObj ? slotObj.fullLabel : ''}`
+                  }
+                </span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span>📍</span>
+                <span>Phòng: <strong class="text-main">${escapeHtml(session.room)}</strong></span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span>👤</span>
+                <span>GV: <strong class="text-main">${escapeHtml(session.lecturer)}</strong></span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span>⏳</span>
+                <span>Tuần ${session.weekStart}–${session.weekEnd}${session.extraNote ? ' • ' + escapeHtml(session.extraNote) : ''}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-pink-300/25 flex items-center justify-between text-xs">
+            ${!status.active
+              ? `<span class="font-extrabold text-amber-700">${escapeHtml(status.badge)}</span>`
+              : '<span class="text-dim">Chạm để xem hoặc sửa lịch</span>'
+            }
+            <span class="font-bold" style="color: var(--accent);">Chi tiết / Sửa →</span>
+          </div>
+        `;
+
+        card.addEventListener('click', () => openSessionModal(session.id, 'view'));
+        container.appendChild(card);
+      });
+    }
+
+    function renderUnscheduledSection() {
+      const listEl = document.getElementById('unscheduled-list');
+      const countEl = document.getElementById('unscheduled-count');
+      const unscheduled = getUnscheduledSessions();
+
+      countEl.textContent = String(unscheduled.length);
+      listEl.innerHTML = '';
+
+      if (unscheduled.length === 0) {
+        listEl.innerHTML = `
+          <div class="md:col-span-2 glass-subtle rounded-2xl p-4 text-xs sm:text-sm text-sub flex items-center justify-between gap-3">
+            <span>✅ Tất cả học phần hiện đều đã được xếp lên bảng thời khóa biểu!</span>
+          </div>
+        `;
+        return;
+      }
+
+      unscheduled.forEach(session => {
+        const modified = isSessionModified(session);
+        const noted = hasNote(session);
+
+        const card = document.createElement('div');
+        card.className = 'glass-strong rounded-3xl p-4 sm:p-5 border-l-4 cursor-pointer hover:scale-[1.01] active:scale-[0.99] transition-transform flex flex-col justify-between gap-3';
+        card.style.borderLeftColor = 'var(--accent)';
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+
+        card.innerHTML = `
+          <div class="flex items-start gap-3.5">
+            <div class="${session.tone} w-11 h-11 rounded-2xl flex items-center justify-center text-xl shrink-0 shadow-sm">
+              ${escapeHtml(session.icon)}
+            </div>
+            <div class="space-y-1 flex-1 min-w-0">
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="text-[11px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full text-white"
+                      style="background: var(--accent-gradient);">
+                  Chờ xếp lịch
+                </span>
+                ${modified ? '<span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-500/20 text-amber-800">Đã sửa</span>' : ''}
+                ${noted ? '<span class="px-2 py-0.5 rounded-full text-[11px] font-bold glass-subtle text-main">📝 Ghi chú</span>' : ''}
+              </div>
+              <h3 class="font-display text-base sm:text-lg font-extrabold text-main leading-snug">
+                ${escapeHtml(session.name)} ${session.credits > 0 ? `(${session.credits} STC)` : ''}
+              </h3>
+              <p class="text-xs text-sub leading-relaxed">
+                ${session.code ? `Mã LHP: <strong class="text-main font-mono">${escapeHtml(session.code)}</strong> • ` : ''}
+                Phòng: <strong class="text-main">${escapeHtml(session.room)}</strong> •
+                GV: <strong class="text-main">${escapeHtml(session.lecturer)}</strong>
+                ${session.extraNote ? `<br/>📌 ${escapeHtml(session.extraNote)}` : ''}
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-end gap-2 pt-1">
+            <span class="px-3 py-1.5 rounded-xl text-xs font-bold glass-subtle text-main">
+              ✏️ Xếp lịch / Xem chi tiết →
+            </span>
+          </div>
+        `;
+
+        card.addEventListener('click', () => openSessionModal(session.id, 'view'));
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openSessionModal(session.id, 'view');
+          }
+        });
+        listEl.appendChild(card);
+      });
+    }
+
+    function switchTab(tabName) {
+      state.activeTab = tabName;
+      const gridBtn = document.getElementById('tab-grid-btn');
+      const listBtn = document.getElementById('tab-list-btn');
+      const gridView = document.getElementById('view-grid');
+      const listView = document.getElementById('view-list');
+      const mobileControls = document.getElementById('mobile-view-controls');
+
+      const isGrid = tabName === 'grid';
+      gridBtn.style.background = isGrid ? 'var(--accent-gradient)' : 'transparent';
+      gridBtn.style.color = isGrid ? '#ffffff' : 'var(--text-secondary)';
+      listBtn.style.background = !isGrid ? 'var(--accent-gradient)' : 'transparent';
+      listBtn.style.color = !isGrid ? '#ffffff' : 'var(--text-secondary)';
+
+      gridView.classList.toggle('hidden', !isGrid);
+      listView.classList.toggle('hidden', isGrid);
+      mobileControls.classList.toggle('hidden', !isGrid);
+    }
+
+    /* ==========================================================================
+       7. MODAL THÔNG TIN & CHỈNH SỬA LỊCH TRỰC TIẾP / THÊM BUỔI
+       ========================================================================== */
+    function populatePresetOptions() {
+      const presetSelect = document.getElementById('edit-preset');
+      presetSelect.innerHTML = '<option value="">— Tự nhập môn mới / chọn môn để học bù —</option>';
+
+      const uniqueCourses = [];
+      const seenCodes = new Set();
+      DEFAULT_SESSIONS.forEach(item => {
+        if (!seenCodes.has(item.code)) {
+          seenCodes.add(item.code);
+          uniqueCourses.push({
+            cleanName: item.name.replace(/\s*\(Buổi \d+\)$/, ''),
+            code: item.code,
+            credits: item.credits,
+            room: item.room === 'Chưa cập nhật' ? '' : item.room,
+            lecturer: item.lecturer === 'Chưa cập nhật' ? '' : item.lecturer,
+            tone: item.tone,
+            icon: item.icon
+          });
+        }
+      });
+
+      uniqueCourses.forEach((c, idx) => {
+        const opt = document.createElement('option');
+        opt.value = String(idx);
+        opt.textContent = `${c.icon} Học bù: ${c.cleanName}`;
+        opt.dataset.course = JSON.stringify(c);
+        presetSelect.appendChild(opt);
+      });
+    }
+
+    function updateTonePickerUI(selectedTone) {
+      state.selectedTone = selectedTone;
+      document.querySelectorAll('.tone-opt').forEach(btn => {
+        const active = btn.getAttribute('data-tone-opt') === selectedTone;
+        btn.style.transform = active ? 'scale(1.15)' : 'scale(1)';
+        btn.style.boxShadow = active ? '0 0 0 3px var(--accent)' : 'none';
+      });
+    }
+
+    function setModalMode(mode) {
+      state.modalMode = mode;
+      const viewTab = document.getElementById('modal-tab-view');
+      const editTab = document.getElementById('modal-tab-edit');
+      const viewPanel = document.getElementById('modal-view-panel');
+      const editForm = document.getElementById('modal-edit-form');
+
+      const isView = mode === 'view';
+      viewTab.style.background = isView ? 'var(--accent-gradient)' : 'transparent';
+      viewTab.style.color = isView ? '#ffffff' : 'var(--text-secondary)';
+      editTab.style.background = !isView ? 'var(--accent-gradient)' : 'transparent';
+      editTab.style.color = !isView ? '#ffffff' : 'var(--text-secondary)';
+
+      viewPanel.classList.toggle('hidden', !isView);
+      editForm.classList.toggle('hidden', isView);
+
+      if (!isView) {
+        updateSlotFieldVisibility();
+        checkLiveOverlapWarning();
+      }
+    }
+
+    function updateSlotFieldVisibility() {
+      const dayVal = document.getElementById('edit-day').value;
+      const slotGroup = document.getElementById('edit-slot-group');
+      const slotSelect = document.getElementById('edit-slot');
+      const isUnscheduled = dayVal === 'unscheduled';
+
+      slotGroup.classList.toggle('hidden', isUnscheduled);
+      slotSelect.disabled = isUnscheduled;
+    }
+
+    function checkLiveOverlapWarning() {
+      const dayVal = document.getElementById('edit-day').value;
+      const slotVal = document.getElementById('edit-slot').value;
+      const warningEl = document.getElementById('overlap-warning');
+      const warningText = document.getElementById('overlap-warning-text');
+
+      if (dayVal === 'unscheduled' || !slotVal) {
+        warningEl.classList.add('hidden');
+        return;
+      }
+
+      const overlapping = state.sessions.filter(
+        s => s.id !== state.modalSessionId && s.day === dayVal && s.slot === slotVal
+      );
+
+      if (overlapping.length > 0) {
+        const names = overlapping.map(s => s.name).join(', ');
+        warningText.textContent = `Lưu ý: Ô này đang có môn ${names}. Nếu lưu, các môn sẽ hiển thị xếp chồng gọn gàng trong cùng ô.`;
+        warningEl.classList.remove('hidden');
+      } else {
+        warningEl.classList.add('hidden');
+      }
+    }
+
+    function openSessionModal(sessionId, initialMode = 'view') {
+      const session = state.sessions.find(s => s.id === sessionId);
+      if (!session) return;
+
+      state.modalSessionId = session.id;
+      state.modalIsAdding = false;
+
+      const modified = isSessionModified(session);
+      const status = session.day === 'unscheduled'
+        ? { active: true, badge: 'Chờ xếp lịch' }
+        : getSessionWeekStatus(session, state.week);
+      const slotObj = getSlotObj(session.slot);
+
+      const badgesHtml = [];
+      if (session.credits > 0) {
+        badgesHtml.push(`<span class="px-2.5 py-1 rounded-full text-xs font-bold text-white" style="background: var(--accent-gradient);">${session.credits} tín chỉ</span>`);
+      }
+      if (modified) {
+        badgesHtml.push('<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-800">✏️ Đã sửa</span>');
+      }
+      if (session.isCustom) {
+        badgesHtml.push('<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-sky-500/20 text-sky-800">✨ Buổi tự thêm</span>');
+      }
+      if (status.badge) {
+        badgesHtml.push(`<span class="px-2.5 py-1 rounded-full text-xs font-bold glass-subtle text-sub">${escapeHtml(status.badge)}</span>`);
+      }
+      document.getElementById('modal-badges').innerHTML = badgesHtml.join('');
+      document.getElementById('modal-title').textContent = `${session.icon} ${session.name}`;
+      document.getElementById('modal-mode-tabs').classList.remove('hidden');
+
+      document.getElementById('view-code').textContent = session.code || '—';
+      document.getElementById('copy-code-btn').classList.toggle('hidden', !session.code);
+      document.getElementById('view-day').textContent = getDayLabel(session.day);
+      document.getElementById('view-slot').textContent = session.day === 'unscheduled'
+        ? 'Chưa xếp tiết'
+        : (slotObj ? slotObj.fullLabel : '—');
+      document.getElementById('view-room').textContent = session.room;
+      document.getElementById('view-lecturer').textContent = session.lecturer;
+      document.getElementById('view-weeks').textContent =
+        `Tuần ${session.weekStart} – ${session.weekEnd}` + (session.extraNote ? ` • ${session.extraNote}` : '');
+
+      const noteKey = getNoteKey(session);
+      const noteInput = document.getElementById('modal-note-input');
+      noteInput.value = state.notes[noteKey] || '';
+      document.getElementById('note-save-status').textContent = hasNote(session)
+        ? 'Đã lưu trên trình duyệt ✓'
+        : 'Tự động lưu trên máy';
+
+      document.getElementById('view-delete-custom-btn').classList.toggle('hidden', !session.isCustom);
+
+      const showCustomFields = session.isCustom;
+      document.getElementById('custom-course-fields').classList.toggle('hidden', !showCustomFields);
+      document.getElementById('quick-preset-wrapper').classList.add('hidden');
+      document.getElementById('edit-name').value = session.name;
+      document.getElementById('edit-code').value = session.code;
+      document.getElementById('edit-credits').value = session.credits;
+      updateTonePickerUI(session.tone);
+
+      document.getElementById('edit-day').value = session.day;
+      document.getElementById('edit-slot').value = session.slot || '1';
+      document.getElementById('edit-room').value = session.room === 'Chưa cập nhật' ? '' : session.room;
+      document.getElementById('edit-lecturer').value = session.lecturer === 'Chưa cập nhật' ? '' : session.lecturer;
+      document.getElementById('edit-week-start').value = session.weekStart;
+      document.getElementById('edit-week-end').value = session.weekEnd;
+      document.getElementById('edit-error-msg').classList.add('hidden');
+
+      document.getElementById('edit-revert-btn').classList.toggle('hidden', !modified);
+      document.getElementById('edit-delete-btn').classList.toggle('hidden', !session.isCustom);
+      document.getElementById('edit-save-btn').innerHTML = '<span>💾</span> Lưu thay đổi';
+
+      setModalMode(initialMode);
+      openModalBackdrop('session-modal');
+    }
+
+    function openAddSessionModal() {
+      state.modalSessionId = null;
+      state.modalIsAdding = true;
+
+      document.getElementById('modal-badges').innerHTML =
+        '<span class="px-2.5 py-1 rounded-full text-xs font-bold text-white" style="background: var(--accent-gradient);">✨ Học bù / Buổi bổ sung</span>';
+      document.getElementById('modal-title').textContent = '➕ Thêm buổi học mới';
+      document.getElementById('modal-mode-tabs').classList.add('hidden');
+
+      populatePresetOptions();
+      document.getElementById('custom-course-fields').classList.remove('hidden');
+      document.getElementById('quick-preset-wrapper').classList.remove('hidden');
+
+      document.getElementById('edit-preset').value = '';
+      document.getElementById('edit-name').value = '';
+      document.getElementById('edit-code').value = '';
+      document.getElementById('edit-credits').value = '0';
+      updateTonePickerUI('tone-strawberry');
+
+      document.getElementById('edit-day').value = state.todayId || '2';
+      document.getElementById('edit-slot').value = '1';
+      document.getElementById('edit-room').value = '';
+      document.getElementById('edit-lecturer').value = '';
+      document.getElementById('edit-week-start').value = state.week;
+      document.getElementById('edit-week-end').value = state.week;
+      document.getElementById('edit-error-msg').classList.add('hidden');
+
+      document.getElementById('edit-revert-btn').classList.add('hidden');
+      document.getElementById('edit-delete-btn').classList.add('hidden');
+      document.getElementById('edit-save-btn').innerHTML = '<span>➕</span> Thêm vào lịch';
+
+      setModalMode('edit');
+      openModalBackdrop('session-modal');
+      setTimeout(() => document.getElementById('edit-name').focus(), 120);
+    }
+
+    function handleEditFormSubmit(e) {
+      e.preventDefault();
+      const errEl = document.getElementById('edit-error-msg');
+      errEl.classList.add('hidden');
+
+      const dayVal = document.getElementById('edit-day').value;
+      const slotVal = dayVal === 'unscheduled' ? '' : document.getElementById('edit-slot').value;
+      const roomVal = document.getElementById('edit-room').value.trim() || 'Chưa cập nhật';
+      const lecturerVal = document.getElementById('edit-lecturer').value.trim() || 'Chưa cập nhật';
+      const weekStart = parseInt(document.getElementById('edit-week-start').value, 10);
+      const weekEnd = parseInt(document.getElementById('edit-week-end').value, 10);
+
+      if (isNaN(weekStart) || isNaN(weekEnd) || weekStart < 1 || weekEnd > 52 || weekStart > weekEnd) {
+        errEl.textContent = 'Vui lòng nhập tuần bắt đầu và tuần kết thúc hợp lệ (từ 1 đến 52, tuần bắt đầu ≤ tuần kết thúc).';
+        errEl.classList.remove('hidden');
+        return;
+      }
+
+      if (state.modalIsAdding) {
+        const nameVal = document.getElementById('edit-name').value.trim();
+        if (!nameVal) {
+          errEl.textContent = 'Cậu nhập tên môn học hoặc buổi học bù giúp tui nhé!';
+          errEl.classList.remove('hidden');
+          document.getElementById('edit-name').focus();
+          return;
+        }
+        const codeVal = document.getElementById('edit-code').value.trim();
+        const creditsVal = Math.max(0, parseInt(document.getElementById('edit-credits').value, 10) || 0);
+
+        const newSession = {
+          id: 'custom-' + Date.now(),
+          name: nameVal,
+          code: codeVal,
+          credits: creditsVal,
+          day: dayVal,
+          slot: slotVal,
+          room: roomVal,
+          lecturer: lecturerVal,
+          weekStart,
+          weekEnd,
+          tone: state.selectedTone,
+          icon: '🍬',
+          extraNote: 'Buổi tự thêm',
+          isCustom: true
+        };
+
+        state.sessions.push(newSession);
+        saveSessions();
+        if (dayVal !== 'unscheduled') state.selectedMobileDay = dayVal;
+        renderAll();
+        closeModalBackdrop('session-modal');
+        showToast(`Đã thêm "${nameVal}" vào thời khóa biểu!`, '✅');
+        return;
+      }
+
+      const idx = state.sessions.findIndex(s => s.id === state.modalSessionId);
+      if (idx === -1) return;
+
+      const current = state.sessions[idx];
+      if (current.isCustom) {
+        const nameVal = document.getElementById('edit-name').value.trim();
+        if (!nameVal) {
+          errEl.textContent = 'Tên buổi học không được để trống nhé!';
+          errEl.classList.remove('hidden');
+          return;
+        }
+        current.name = nameVal;
+        current.code = document.getElementById('edit-code').value.trim();
+        current.credits = Math.max(0, parseInt(document.getElementById('edit-credits').value, 10) || 0);
+        current.tone = state.selectedTone;
+      }
+
+      current.day = dayVal;
+      current.slot = slotVal;
+      current.room = roomVal;
+      current.lecturer = lecturerVal;
+      current.weekStart = weekStart;
+      current.weekEnd = weekEnd;
+
+      if (current.id === 'gdqp-1' && dayVal !== 'unscheduled') {
+        current.extraNote = 'Đã tự xếp lịch';
+      } else if (current.id === 'gdqp-1' && dayVal === 'unscheduled') {
+        current.extraNote = 'Chờ lịch học tập trung từ trường';
+      }
+
+      saveSessions();
+      if (dayVal !== 'unscheduled') state.selectedMobileDay = dayVal;
+      renderAll();
+      closeModalBackdrop('session-modal');
+      showToast('Đã lưu thay đổi lịch học!', '💾');
+    }
+
+    function revertSingleSession() {
+      const idx = state.sessions.findIndex(s => s.id === state.modalSessionId);
+      const orig = DEFAULT_SESSIONS.find(d => d.id === state.modalSessionId);
+      if (idx === -1 || !orig) return;
+
+      state.sessions[idx] = { ...orig };
+      saveSessions();
+      renderAll();
+      openSessionModal(orig.id, 'view');
+      showToast(`Đã khôi phục lịch gốc cho môn "${orig.name}"`, '↺');
+    }
+
+    function requestDeleteCustomSession() {
+      const session = state.sessions.find(s => s.id === state.modalSessionId);
+      if (!session || !session.isCustom) return;
+
+      openConfirmModal({
+        icon: '🗑️',
+        title: 'Xóa buổi học này?',
+        desc: `Buổi "${session.name}" sẽ bị gỡ khỏi thời khóa biểu của cậu.`,
+        okLabel: 'Xóa buổi',
+        okColor: 'linear-gradient(135deg, #f43f5e 0%, #e11d48 100%)',
+        onConfirm: () => {
+          state.sessions = state.sessions.filter(s => s.id !== session.id);
+          saveSessions();
+          renderAll();
+          closeModalBackdrop('session-modal');
+          showToast(`Đã xóa "${session.name}"`, '🗑️');
+        }
+      });
+    }
+
+    function requestResetAllSchedule() {
+      openConfirmModal({
+        icon: '↺',
+        title: 'Khôi phục toàn bộ lịch gốc?',
+        desc: 'Toàn bộ các thay đổi ngày học, phòng học và buổi học bù tự thêm sẽ quay về đúng lịch gốc HK02 (2026–2027). Ghi chú cá nhân của từng môn vẫn được giữ nguyên.',
+        okLabel: 'Khôi phục gốc',
+        okColor: 'var(--accent-gradient)',
+        onConfirm: () => {
+          state.sessions = cloneDefaultSessions();
+          saveSessions();
+          renderAll();
+          showToast('Đã khôi phục toàn bộ thời khóa biểu về lịch gốc HK02!', '↺');
+        }
+      });
+    }
+
+    function saveCurrentNote(value) {
+      if (!state.modalSessionId) return;
+      const session = state.sessions.find(s => s.id === state.modalSessionId);
+      if (!session) return;
+
+      const key = getNoteKey(session);
+      const trimmed = value.trim();
+      if (trimmed) state.notes[key] = value;
+      else delete state.notes[key];
+
+      safeSet(STORAGE_KEYS.notes, JSON.stringify(state.notes));
+      document.getElementById('note-save-status').textContent = trimmed ? 'Đã lưu tự động ✓' : 'Đã xóa ghi chú';
+      renderAll();
+    }
+
+    function openModalBackdrop(id) {
+      document.getElementById(id).classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModalBackdrop(id) {
+      document.getElementById(id).classList.remove('open');
+      const anyOpen = document.querySelectorAll('.modal-backdrop.open').length > 0;
+      if (!anyOpen) document.body.style.overflow = '';
+    }
+
+    function openConfirmModal({ icon, title, desc, okLabel, okColor, onConfirm }) {
+      document.getElementById('confirm-icon').textContent = icon || '⚠️';
+      document.getElementById('confirm-title').textContent = title;
+      document.getElementById('confirm-desc').textContent = desc;
+      const okBtn = document.getElementById('confirm-ok-btn');
+      okBtn.textContent = okLabel || 'Xác nhận';
+      okBtn.style.background = okColor || 'var(--accent-gradient)';
+      state.confirmAction = onConfirm;
+      openModalBackdrop('confirm-modal');
+    }
+
+    /* ==========================================================================
+       8. CANVAS HIỆU ỨNG NỀN PASTEL KẸO NGỌT (4 CHỦ ĐỀ)
+       ========================================================================== */
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let clouds = [];
+    let rafId = null;
+
+    function resizeCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      initCanvasParticles();
+    }
+
+    function initCanvasParticles() {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      particles = [];
+      clouds = [];
+
+      const cloudCount = w < 640 ? 4 : 6;
+      for (let i = 0; i < cloudCount; i++) {
+        clouds.push({
+          x: Math.random() * (w + 260) - 130,
+          y: Math.random() * (h * 0.8) + 20,
+          scale: 0.62 + Math.random() * 0.72,
+          speed: 0.1 + Math.random() * 0.16,
+          alpha: 0.16 + Math.random() * 0.14
+        });
+      }
+
+      const count = w < 640 ? 18 : 30;
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: state.theme === 'pink' ? (4 + Math.random() * 8) : (1.5 + Math.random() * 2.5),
+          vy: -(0.1 + Math.random() * 0.2),
+          vx: (Math.random() - 0.5) * 0.16,
+          phase: Math.random() * Math.PI * 2,
+          speed: 0.015 + Math.random() * 0.02,
+          isBubble: i % 2 === 0
+        });
+      }
+    }
+
+    function drawCandyCloud(c) {
+      ctx.save();
+      ctx.translate(c.x, c.y);
+      ctx.scale(c.scale, c.scale);
+
+      const colorMap = {
+        pink: `rgba(255, 250, 252, ${c.alpha})`,
+        mint: `rgba(248, 253, 251, ${c.alpha})`,
+        lavender: `rgba(252, 250, 255, ${c.alpha})`,
+        peach: `rgba(255, 252, 249, ${c.alpha})`
+      };
+      ctx.fillStyle = colorMap[state.theme] || `rgba(255, 255, 255, ${c.alpha})`;
+
+      ctx.beginPath();
+      ctx.arc(0, 0, 34, 0, Math.PI * 2);
+      ctx.arc(32, -10, 40, 0, Math.PI * 2);
+      ctx.arc(70, -2, 32, 0, Math.PI * 2);
+      ctx.arc(98, 10, 24, 0, Math.PI * 2);
+      ctx.arc(-24, 12, 22, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function drawSparkle(x, y, r, alpha, color) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.fillStyle = color;
+      ctx.globalAlpha = alpha;
+      ctx.beginPath();
+      ctx.moveTo(0, -r * 2);
+      ctx.quadraticCurveTo(0, 0, r * 2, 0);
+      ctx.quadraticCurveTo(0, 0, 0, r * 2);
+      ctx.quadraticCurveTo(0, 0, -r * 2, 0);
+      ctx.quadraticCurveTo(0, 0, 0, -r * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function animateCanvas() {
+      if (!state.motionEnabled) return;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      ctx.clearRect(0, 0, w, h);
+
+      clouds.forEach(c => {
+        c.x += c.speed;
+        if (c.x - 160 > w) c.x = -170;
+        drawCandyCloud(c);
+      });
+
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.phase += p.speed;
+        if (p.y < -20) { p.y = h + 20; p.x = Math.random() * w; }
+
+        const alpha = 0.14 + (Math.sin(p.phase) + 1) * 0.16;
+
+        if (state.theme === 'pink' && p.isBubble) {
+          // Bong bóng Bubblegum Pink trôi nhẹ
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 245, 249, ${alpha * 0.55})`;
+          ctx.fill();
+          ctx.strokeStyle = `rgba(240, 154, 192, ${alpha * 0.65})`;
+          ctx.lineWidth = 1.1;
+          ctx.stroke();
+          ctx.restore();
+        } else {
+          const sparkColor = {
+            pink: '#F5C2D7',
+            mint: '#D1E4DC',
+            lavender: '#DED6EC',
+            peach: '#EAD8CA'
+          }[state.theme] || '#FFFFFF';
+          drawSparkle(p.x, p.y, Math.min(p.r, 2.8), alpha, sparkColor);
+        }
+      });
+
+      rafId = requestAnimationFrame(animateCanvas);
+    }
+
+    function startCanvasLoop() {
+      stopCanvasLoop();
+      rafId = requestAnimationFrame(animateCanvas);
+    }
+
+    function stopCanvasLoop() {
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    /* ==========================================================================
+       9. GẮN SỰ KIỆN & KHỞI CHẠY
+       ========================================================================== */
+    function bindEvents() {
+      document.querySelectorAll('[data-theme-btn]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const next = btn.getAttribute('data-theme-btn');
+          applyTheme(next);
+          const names = {
+            pink: 'Bubblegum Pink',
+            mint: 'Bạc Hà Sữa',
+            lavender: 'Oải Hương Sữa',
+            peach: 'Đào Sữa'
+          };
+          showToast(`Đã đổi sang theme ${names[next]}`, '🫧');
+        });
+      });
+
+      document.getElementById('toggle-motion-btn').addEventListener('click', () => applyMotion(!state.motionEnabled));
+      document.getElementById('fullscreen-btn').addEventListener('click', toggleFullscreen);
+      document.addEventListener('fullscreenchange', updateFullscreenButton);
+      document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+
+      document.getElementById('add-session-btn').addEventListener('click', openAddSessionModal);
+      document.getElementById('reset-all-btn').addEventListener('click', requestResetAllSchedule);
+
+      document.getElementById('tab-grid-btn').addEventListener('click', () => switchTab('grid'));
+      document.getElementById('tab-list-btn').addEventListener('click', () => switchTab('list'));
+
+      document.getElementById('week-slider').addEventListener('input', e => {
+        state.week = parseInt(e.target.value, 10);
+        renderAll();
+      });
+      document.getElementById('week-prev-btn').addEventListener('click', () => {
+        if (state.week > 17) { state.week -= 1; renderAll(); }
+      });
+      document.getElementById('week-next-btn').addEventListener('click', () => {
+        if (state.week < 30) { state.week += 1; renderAll(); }
+      });
+
+      document.getElementById('mobile-mode-day').addEventListener('click', () => {
+        state.mobileViewMode = 'day';
+        updateMobileViewModeUI();
+      });
+      document.getElementById('mobile-mode-grid').addEventListener('click', () => {
+        state.mobileViewMode = 'grid';
+        updateMobileViewModeUI();
+      });
+
+      document.getElementById('modal-close-btn').addEventListener('click', () => closeModalBackdrop('session-modal'));
+      document.getElementById('session-modal').addEventListener('click', e => {
+        if (e.target.id === 'session-modal') closeModalBackdrop('session-modal');
+      });
+
+      document.getElementById('modal-tab-view').addEventListener('click', () => setModalMode('view'));
+      document.getElementById('modal-tab-edit').addEventListener('click', () => setModalMode('edit'));
+      document.getElementById('quick-edit-btn').addEventListener('click', () => setModalMode('edit'));
+
+      document.getElementById('copy-code-btn').addEventListener('click', () => {
+        copyTextSafe(document.getElementById('view-code').textContent);
+      });
+
+      const noteInput = document.getElementById('modal-note-input');
+      noteInput.addEventListener('input', e => saveCurrentNote(e.target.value));
+      document.querySelectorAll('.quick-note-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const snippet = btn.getAttribute('data-quick-note');
+          const cur = noteInput.value.trim();
+          noteInput.value = cur ? `${cur}\n${snippet}` : snippet;
+          saveCurrentNote(noteInput.value);
+          noteInput.focus();
+        });
+      });
+      document.getElementById('clear-note-btn').addEventListener('click', () => {
+        noteInput.value = '';
+        saveCurrentNote('');
+        showToast('Đã xóa ghi chú cá nhân', '🧹');
+      });
+
+      document.getElementById('edit-day').addEventListener('change', () => {
+        updateSlotFieldVisibility();
+        checkLiveOverlapWarning();
+      });
+      document.getElementById('edit-slot').addEventListener('change', checkLiveOverlapWarning);
+
+      document.getElementById('edit-preset').addEventListener('change', e => {
+        const opt = e.target.selectedOptions[0];
+        if (!opt || !opt.dataset.course) return;
+        try {
+          const c = JSON.parse(opt.dataset.course);
+          document.getElementById('edit-name').value = `Học bù - ${c.cleanName}`;
+          document.getElementById('edit-code').value = c.code;
+          document.getElementById('edit-credits').value = '0';
+          document.getElementById('edit-room').value = c.room;
+          document.getElementById('edit-lecturer').value = c.lecturer;
+          updateTonePickerUI(c.tone);
+        } catch (err) {
+          // Bỏ qua nếu không parse được preset
+        }
+      });
+
+      document.querySelectorAll('.tone-opt').forEach(btn => {
+        btn.addEventListener('click', () => updateTonePickerUI(btn.getAttribute('data-tone-opt')));
+      });
+
+      document.getElementById('modal-edit-form').addEventListener('submit', handleEditFormSubmit);
+      document.getElementById('edit-cancel-btn').addEventListener('click', () => {
+        if (state.modalIsAdding) closeModalBackdrop('session-modal');
+        else setModalMode('view');
+      });
+      document.getElementById('edit-revert-btn').addEventListener('click', revertSingleSession);
+      document.getElementById('edit-delete-btn').addEventListener('click', requestDeleteCustomSession);
+      document.getElementById('view-delete-custom-btn').addEventListener('click', requestDeleteCustomSession);
+
+      document.getElementById('confirm-cancel-btn').addEventListener('click', () => closeModalBackdrop('confirm-modal'));
+      document.getElementById('confirm-modal').addEventListener('click', e => {
+        if (e.target.id === 'confirm-modal') closeModalBackdrop('confirm-modal');
+      });
+      document.getElementById('confirm-ok-btn').addEventListener('click', () => {
+        const fn = state.confirmAction;
+        state.confirmAction = null;
+        closeModalBackdrop('confirm-modal');
+        if (typeof fn === 'function') fn();
+      });
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          if (document.getElementById('confirm-modal').classList.contains('open')) {
+            closeModalBackdrop('confirm-modal');
+          } else if (document.getElementById('session-modal').classList.contains('open')) {
+            closeModalBackdrop('session-modal');
+          }
+        }
+      });
+
+      window.addEventListener('resize', resizeCanvas);
+    }
+
+    window.addEventListener('load', () => {
+      detectStandaloneMode();
+      resizeCanvas();
+      bindEvents();
+      applyTheme(state.theme);
+      applyMotion(state.motionEnabled);
+      switchTab('grid');
+      updateMobileViewModeUI();
+      updateFullscreenButton();
+      renderAll();
+    });
+  </script>
+</body>
+</html>
